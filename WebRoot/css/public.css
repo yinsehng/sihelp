@@ -1,0 +1,4 @@
+.bt a{ display:inline-block; background:url('img/bt1.gif') no-repeat left top; text-decoration:none; padding-left:8px; color:#3B6375;}
+.bt a:hover{ background:url('img/bt1.gif') no-repeat left -24px; color:#000;}
+.bt a span{display:inline-block; background:url('img/bt1.gif') no-repeat right top;height:24px;line-height:24px;padding-right:8px; cursor:pointer;}
+.bt a:hover span{ background:url('img/bt1.gif') no-repeat right -24px;}

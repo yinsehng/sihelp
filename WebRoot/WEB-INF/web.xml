@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ 
+  
+<filter>
+    <filter-name>LogonFilter</filter-name>
+ 	<filter-class>com.neusoft.util.LogonFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>LogonFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+    <url-pattern>*.jsp</url-pattern>
+</filter-mapping> 
+ <!-- 验证码 -->
+ <servlet>
+  <servlet-name>ImageCodeMakerServlet</servlet-name>
+  <servlet-class>com.neusoft.util.ImageCodeMakerServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>ImageCodeMakerServlet</servlet-name>
+  <url-pattern>/servlet/ImgServlet</url-pattern>
+ </servlet-mapping>
+ 
+ <!-- FCK -->
+<servlet>
+   <servlet-name>Connector</servlet-name>
+   <servlet-class>
+    net.fckeditor.connector.ConnectorServlet
+   </servlet-class>
+   <load-on-startup>1</load-on-startup>
+</servlet>
+
+<servlet-mapping>
+   <servlet-name>Connector</servlet-name>
+   <url-pattern>
+    /fckeditor/editor/filemanager/connectors/*
+   </url-pattern>
+</servlet-mapping>
+ 
+ <servlet>
+  <servlet-name>LogonServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.LogonServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ClearKc33Servlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.ClearKc33Servlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>SelKc33Servlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.SelKc33Servlet</servlet-class>
+ </servlet>
+ <!-- 添加网签处理的servlet 2017/11/21  -->
+ <servlet>
+  <servlet-name>SelProtocolServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.SelProtocolServlet</servlet-class>
+ </servlet>
+ <!-- end -->
+ <!-- 添加保存医院网签协议的servlet 2017/11/25 -->
+ <servlet>
+  <servlet-name>SubmitProtocolServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.SubmitProtocolServlet</servlet-class>
+ </servlet>
+ <!-- end -->
+  <servlet>
+  <servlet-name>SavePersonServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.SavePersonServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>CheckPersonServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.CheckPersonServlet</servlet-class>
+ </servlet>
+  <servlet>
+  <servlet-name>JInfoMangerServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.JInfoMangerServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>EditJInfoServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.EditJInfoServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>SaveJInfoServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.SaveJInfoServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>UserManagerServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.UserManagerServlet</servlet-class>
+ </servlet>
+  <servlet>
+  <servlet-name>ProtocolManageServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.ProtocolManageServlet</servlet-class>
+ </servlet>
+ 
+ <servlet>
+  <servlet-name>EditProtocolServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.EditProtocolServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>SaveProtocolServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.SaveProtocolServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ProtocolCountServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.ProtocolCountServlet</servlet-class>
+ </servlet>
+ 
+ <servlet>
+  <servlet-name>CheckProtocolServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.CheckProtocolServlet</servlet-class>
+ </servlet>
+ 
+ <servlet>
+  <servlet-name>DownloadServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.DownloadServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>SelLocalDbServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.SelLocalDbServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>UpdLocalDbServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.UpdLocalDbServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>UpdPassWordServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.UpdPassWordServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>SelYa02Servlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.SelYa02Servlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>UpdYa02Servlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.UpdYa02Servlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>AjaxCountServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.AjaxCountServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>SelKb01Servlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.SelKb01Servlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>TestServlet</servlet-name>
+  <servlet-class>com.neusoft.servlet.TestServlet</servlet-class>
+ </servlet>
+  <servlet>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.AdminServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SubmitPb01</servlet-name>
+    <servlet-class>com.neusoft.servlet.SubmitPb01</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SihelpServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.SihelpServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddUser</servlet-name>
+    <servlet-class>com.neusoft.servlet.AddUser</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SelOperatorServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.SelOperatorServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddOperatorServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.AddOperatorServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SelOperForUpdServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.SelOperForUpdServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DelOperatorServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.DelOperatorServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SelOperatorAdminServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.SelOperatorAdminServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UpdOperatorAdminServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.UpdOperatorAdminServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SelCourseServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.course.SelCourseServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddCourseServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.course.AddCourseServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SelCourseForUpdServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.course.SelCourseForUpdServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DelCourseServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.course.DelCourseServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SelCourKb01Servlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.course.SelCourKb01Servlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SelCourseForSduServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.course.SelCourseForSduServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UpdQxyyServlet</servlet-name>
+    <servlet-class>com.neusoft.servlet.online.UpdQxyyServlet</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ <servlet-mapping>
+  <servlet-name>LogonServlet</servlet-name>
+  <url-pattern>/servlet/LogonServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ClearKc33Servlet</servlet-name>
+  <url-pattern>/servlet/ClearKc33Servlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>SelKc33Servlet</servlet-name>
+  <url-pattern>/servlet/SelKc33Servlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>SelProtocolServlet</servlet-name>
+  <url-pattern>/servlet/SelProtocolServlet</url-pattern>
+ </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>SubmitProtocolServlet</servlet-name>
+  <url-pattern>/servlet/SubmitProtocolServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>EditProtocolServlet</servlet-name>
+  <url-pattern>/servlet/EditProtocolServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>SaveProtocolServlet</servlet-name>
+  <url-pattern>/servlet/SaveProtocolServlet</url-pattern>
+ </servlet-mapping>
+ 
+   <servlet-mapping>
+  <servlet-name>JInfoMangerServlet</servlet-name>
+  <url-pattern>/servlet/JInfoMangerServlet</url-pattern>
+ </servlet-mapping>
+   <servlet-mapping>
+  <servlet-name>EditJInfoServlet</servlet-name>
+  <url-pattern>/servlet/EditJInfoServlet</url-pattern>
+ </servlet-mapping>
+   <servlet-mapping>
+  <servlet-name>SaveJInfoServlet</servlet-name>
+  <url-pattern>/servlet/SaveJInfoServlet</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+  <servlet-name>CheckProtocolServlet</servlet-name>
+  <url-pattern>/servlet/CheckProtocolServlet</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+  <servlet-name>DownloadServlet</servlet-name>
+  <url-pattern>/servlet/DownloadServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ <servlet-name>ProtocolManageServlet</servlet-name>
+  <url-pattern>/servlet/ProtocolManageServlet</url-pattern>
+ </servlet-mapping>
+  <servlet-mapping>
+ <servlet-name>UserManagerServlet</servlet-name>
+  <url-pattern>/servlet/UserManagerServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ <servlet-name>ProtocolCountServlet</servlet-name>
+  <url-pattern>/servlet/ProtocolCountServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+ <servlet-name>SavePersonServlet</servlet-name>
+  <url-pattern>/servlet/SavePersonServlet</url-pattern>
+ </servlet-mapping>
+  <servlet-mapping>
+ <servlet-name>CheckPersonServlet</servlet-name>
+  <url-pattern>/servlet/CheckPersonServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>SelLocalDbServlet</servlet-name>
+  <url-pattern>/servlet/SelLocalDbServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdLocalDbServlet</servlet-name>
+  <url-pattern>/servlet/UpdLocalDbServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdPassWordServlet</servlet-name>
+  <url-pattern>/servlet/UpdPassWordServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>SelYa02Servlet</servlet-name>
+  <url-pattern>/servlet/SelYa02Servlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>UpdYa02Servlet</servlet-name>
+  <url-pattern>/servlet/UpdYa02Servlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>AjaxCountServlet</servlet-name>
+  <url-pattern>/servlet/AjaxCountServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>SelKb01Servlet</servlet-name>
+  <url-pattern>/servlet/SelKb01Servlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>TestServlet</servlet-name>
+  <url-pattern>/servlet/TestServlet</url-pattern>
+ </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/exec.action</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SubmitPb01</servlet-name>
+    <url-pattern>/servlet/SubmitPb01</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SihelpServlet</servlet-name>
+    <url-pattern>/servlet/SihelpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddUser</servlet-name>
+    <url-pattern>/servlet/AddUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelOperatorServlet</servlet-name>
+    <url-pattern>/oper/SelOperator.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddOperatorServlet</servlet-name>
+    <url-pattern>/oper/AddOperator.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelOperForUpdServlet</servlet-name>
+    <url-pattern>/oper/SelOperForUpd.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DelOperatorServlet</servlet-name>
+    <url-pattern>/oper/DelOperator.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelOperatorAdminServlet</servlet-name>
+    <url-pattern>/oper/SelOperatorAdmin.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdOperatorAdminServlet</servlet-name>
+    <url-pattern>/oper/UpdOperatorAdmin.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelCourseServlet</servlet-name>
+    <url-pattern>/course/SelCourse.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddCourseServlet</servlet-name>
+    <url-pattern>/course/AddCourse.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelCourseForUpdServlet</servlet-name>
+    <url-pattern>/course/SelCourseForUpd.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DelCourseServlet</servlet-name>
+    <url-pattern>/course/DelCourse.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelCourKb01Servlet</servlet-name>
+    <url-pattern>/course/SelCourKb01.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelCourseForSduServlet</servlet-name>
+    <url-pattern>/course/SelCourseForSdu.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdQxyyServlet</servlet-name>
+    <url-pattern>/oper/UpdQxyy.do</url-pattern>
+  </servlet-mapping>
+ 
+  
+ <welcome-file-list>
+  <welcome-file>index.jsp</welcome-file>
+ </welcome-file-list>
+  <error-page>
+  <error-code>500</error-code>
+  <location>/index.jsp</location>
+ </error-page>
+ <error-page>
+  <error-code>404</error-code>
+  <location>/index.jsp</location>
+ </error-page>
+ <error-page>
+ <exception-type>java.lang.Exception</exception-type>
+  <location>/index.jsp</location>
+ </error-page>
+</web-app>

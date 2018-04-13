@@ -1,0 +1,23 @@
+<reponseEnvelope>
+    <header>
+        <appCode>0</appCode>
+        <errorMessage briefMessage="" detailMessage=""/>
+   </header>
+   <body>
+         <parameters>
+                <parameter paraName="$ARCHIVEFLAG$" paraValue="FALSE"/>
+                <parameter paraName="$SAVEPAGEFLAG$" paraValue="0"/>
+                <parameter paraName="$OPERATEID$" paraValue="1000000102684549"/>
+                <parameter paraName="$YW_PASS_TIME_RESET$" paraValue="true"/>
+                <parameter paraName="BARCODE" paraValue=""/>
+                <parameter paraName="busiConfig" paraValue=""/>
+                <parameter paraName="$BUSINESSID$" paraValue="UCK106"/>
+                <parameter paraName="$BUSINESSREQUESTID$" paraValue="REQ-KF-M-011-00"/>
+                <parameter paraName="writeCardInfo" paraValue=""/>
+                <parameter paraName="outputData" paraValue="2032-20130116105405-820^1^2032-00000DBA-20130116975|^0|||^"/>
+                <parameter paraName="cardConfig" paraValue=""/>
+           </parameters>
+           <dataStores>
+           </dataStores>
+    </body>
+</reponseEnvelope>

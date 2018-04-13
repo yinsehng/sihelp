@@ -1,0 +1,36 @@
+现在的需求是 ：选择用户，则显示用户所拥有的权限， 权限是用树来进行表示的 ，列出所有的权限，勾选用户所拥有的权限， 但是显示用户权限的时候，用户是不可以对其进行修改的，所以这个时候 checkbox 是不能进行选择的。
+
+  如下图 ：
+
+
+相关代码 ：
+
+
+JScript code
+  $('#tt').tree({
+    checkbox: true,
+    url: 'xx.action?rId='+node.id,
+    animate : true,
+    cascadeCheck : true,
+    onlyLeafCheck : false,
+    onBeforeExpand:function(actionNode,param){
+        ...
+    },onLoadSuccess:function(node,data){
+        ...
+    }
+                        
+  });
+
+ **********************************************
+在节点加载后把复选框的事件绑定去掉。
+
+ 
+$('#tt').tree({
+onLoadSuccess:function(){
+$(this).find('span.tree-checkbox').unbind().click(function(){
+return false;
+});
+}
+});
+
+ 
