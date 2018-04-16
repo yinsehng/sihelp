@@ -199,11 +199,12 @@ function timer() {
       </tr>
       
       <tr>
-        <td height="80" bgcolor="#FFFFFF" class="STYLE6"  style="text-align: left;" colspan="2">
-          <div style="width: 30%;float: left;padding:10px 0px 10px 30px;"> 
-			<ul>
-			  <li>医院药店：<select name="type" style="width: 100px;">
-			  		 <option value="0">==选择类别==</option>
+        <td height="40" bgcolor="#FFFFFF" class="STYLE6"  style="text-align: left;" colspan="2">
+         <div style="width: 95%;height:40%;float: left;padding:0px 0px 10px 30px;"> 
+			 <div style="width:20%;height:100%;float: left;"></div>
+			 <div style="width:20%;height:100%;float: left;margin-left: 5px;">
+			 	医院药店：<select name="type" style="width: 150px;">
+			  		 <option value="0">====请选择类别====</option>
 					 <c:choose>
 					    <c:when test="${param.type==1}"> 
 					    	<option value="1" selected="selected">医院</option>
@@ -221,15 +222,15 @@ function timer() {
 					    </c:otherwise>
 					 </c:choose>
 			  	</select>
-			  </li>
-			  <li>网签年份：<input type="text" name="WQ_YEAR" value="${param.WQ_YEAR}" style="width: 100px;"/></li>
-			</ul>
-		   </div>
-		   <div style="width: 30%;float: left; margin-top: 10px;"> 
-		     <div style="float: left;width: 20%">
-		       <input type="submit" value="查询"/><p/>
-		     </div>
-		   </div>
+			 </div>
+			 <div style="width:20%;height:100%;float: left;margin-left: 5px;">
+			 	网签年份：<input type="text" name="WQ_YEAR" value="${param.WQ_YEAR}" style="width: 150px;"/>
+			 </div>
+			 <div style="width:20%;height:100%;float: left;margin-left: 5px;">
+			 	<input type="submit" value="查询"/><p/>
+			 </div>
+			 <div style="width:15%;height:100%;float: left;margin-left: 5px;"></div>
+		  </div>
 		</td>
       </tr>
       
@@ -252,8 +253,8 @@ function timer() {
          <td width="8%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">经办时间</span></div></td>
         <td width="17%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">操作</span></div></td>
       </tr>
-      <c:forEach items="${page.list}" var="p">
-		    <tr onmouseover="moves('')" onmouseout="outs('')" id="t_" >
+      <c:forEach items="${page.list}" var="p" varStatus="status">
+		    <tr onmouseover="moves('${status.index+1}')" onmouseout="outs('${status.index+1}')" id="t_${status.index+1}" >
 		        <td height="20" bgcolor="#FFFFFF"><div align="center">
 					<input type="checkbox" name="cid"   value=""/>
 		        </div></td>
@@ -307,7 +308,7 @@ function timer() {
 		        </td>
 		        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
 		        	<div align="left">
-				        <input type="button" value="修改信息" onclick="editProtocol(${p.AKB020},${p.WQ_YEAR});"/>&nbsp;&nbsp;
+				        <input style="margin-left: 5px;" type="button" value="修改信息" onclick="editProtocol(${p.AKB020},${p.WQ_YEAR});"/>&nbsp;&nbsp;
 				        <input type="button" value="打印" onclick="printProtocol(${p.AKB020},${p.WQ_YEAR});"/>&nbsp;&nbsp;
 		        	</div>
 		        </td>

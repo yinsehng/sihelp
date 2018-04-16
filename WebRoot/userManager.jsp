@@ -44,6 +44,12 @@ body {
 ul,li{padding: 0px;margin: 0px; border: 0px;}
 .otr td{background-color: #D3EAEF;}
 .notr td{background-color: #ffffff;}
+.content {
+    position: absolute;
+    top: 50%;
+    height: 240px;
+    margin-top: -120px; /* negative half of the height */
+}
 </style>
 
 <script language="javascript">
@@ -86,10 +92,17 @@ function del(t){
     }
 }
 function moves(id){
-	document.getElementById("t_"+id).className='otr';
+	var bgcolor = $('#t'+id).attr('bgcolor');
+	if (bgcolor != "#98F5FF") {
+		document.getElementById("t"+id).className='otr';
+	}
 }
 function outs(id){
-	document.getElementById("t_"+id).className='Notr';
+	var bgcolor = $('#t'+id).attr('bgcolor');
+	if (bgcolor != "#98F5FF") {
+		document.getElementById("t"+id).className='Notr';
+	}
+	
 }
 var delid;
 function delonly(id){
@@ -139,13 +152,62 @@ $(document).ready(function(){
 		}
 		window.location.href="<%=basePath %>servlet/UserManagerServlet?page="+topg;
 	});
+	
+	$("#export").click(function(){
+		var akb020 = $("#akb020").val();
+		var akb021 = $("#akb021").val();
+		var WQ_YEAR = $("#WQ_YEAR").val();
+		var type = $("#type").val();
+		window.location.href="<%=basePath %>/servlet/ExportBooksTableServlet?akb020="+akb020+"&akb021="+akb021+"&WQ_YEAR="+WQ_YEAR+"&type="+type;
+	});
+	
+	$(".dbclick").dblclick(function(){
+	    var id = $(this).attr("id");
+	    id ="#" + id + " .STYLE19";
+	    var val = $($($(id)[5]).children()[0]).attr("attr-val");
+	    var akb020 = $($($(id)[1]).children()[0]).attr("attr-val");
+	    var year = $($($(id)[6]).children()[0]).attr("attr-val");
+	    if (val == '1') {
+	    	 $.ajax({
+		      	    url:"<%=basePath%>servlet/FindProtocolPersonServlet?temptime="+Math.random(),
+		      	    data:{
+		      	    	"akb020":akb020,
+		      	    	"year":year
+		      	    },  
+		      	    type:'GET',
+		      	    cache:false, 
+		      	    dataType:'text',
+		      	    success:function(result) {
+		      	    	if (result != null) {
+		      	    		SimplePop.print(result,
+									  {
+								  		type: "print",
+								  		title: "签订协议人员基本信息",
+								  		opacity: 0.2,
+								  		cancel: function(){
+						                  
+						              },
+						              confirm: function(){
+						              	
+						              }
+									  });
+		      	    	}
+		      	  	
+		      	    },
+		      	    error : function() {
+		      	    	
+		      	    }
+		      	});
+	    
+	    }
+	  });
 });
 </script>
 <script type="text/javascript" src="<%=basePath%>js/page.js"></script>
 </head>
 
 <body>
-<form action="<%=basePath %>course/SelCourse.do" method="post" id="sform">
+<form action="<%=basePath %>servlet/UserManagerServlet" method="post" id="sform">
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" >
   <tr>
     <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -171,7 +233,51 @@ $(document).ready(function(){
 		甲方信息列表
  		</td>
       </tr>
-     
+     <tr>
+        <td height="40" bgcolor="#FFFFFF" class="STYLE6"  style="text-align: left;" colspan="2">
+          <div style="width: 95%;height:65%;float: left;padding:0px 0px 10px 30px;"> 
+			 <div style="width:20%;height:100%;float: left;padding-top: 15px;">
+			 	医院编号：<input type="text" id="akb020" name="akb020" value="${akb020}" style="width: 150px;"/>
+			 </div>
+			 <div style="width:20%;height:100%;float: left;margin-left: 5px;padding-top: 15px;">
+			 	医院名称：<input type="text" id="akb021" name="akb021" value="${akb021}" style="width: 150px;"/>
+			 </div>
+			 <div style="width:20%;height:100%;float: left;margin-left: 5px;padding-top: 15px;">
+			 	网签年份：<input type="text" id="WQ_YEAR" name="WQ_YEAR" value="${WQ_YEAR}" style="width: 150px;"/>
+			 </div>
+			 <div style="width:20%;height:100%;float: left;margin-left: 5px;padding-top: 15px;">
+			 	协议状态：<select id="type" name="type" style="width: 150px;">
+			  		 <option value="0" >====请选择类别====</option>
+			  		 <c:choose>
+					    <c:when test="${type==1}"> 
+					    	<option value="1" selected="selected">已签订</option>
+					    </c:when>
+					    <c:otherwise>  
+					  	    <option value="1">已签订</option>
+					    </c:otherwise>
+					 </c:choose>
+					 <c:choose>
+					    <c:when test="${type==2}"> 
+					    	<option value="2" selected="selected">未签订</option>
+					    </c:when>
+					    <c:otherwise>  
+					  	    <option value="2">未签订</option>
+					    </c:otherwise>
+					 </c:choose>
+			  	</select>
+			 </div>
+			 <div style="width:15%;height:10%;float: left;margin-left: 5px;padding-top: 15px;">
+			 	
+			 	<div style="width:5%;height:100%;float: left;margin-left: 5px;">
+			 		<input type="submit" value="查询"/><p/>
+			 	</div>
+			 	<div style="width:5%;height:100%;float: left;margin-left: 50px;">
+			 		<input id ="export" type="button" value="导出"/><p/>
+			 	</div>
+			 </div>
+		  </div>
+		</td>
+      </tr>
     </table></td>
   </tr>
   <tr><td>&nbsp;</td></tr>
@@ -182,27 +288,29 @@ $(document).ready(function(){
           <input type="checkbox" name="all" title="点击反选"/>
         </div></td>
         <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">序号</span></div></td>
-        <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">用户编号</span></div></td>
-        <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">密码</span></div></td>
+        <td width="7%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">用户编号</span></div></td>
+        <td width="7%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">密码</span></div></td>
         <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">医疗机构类型</span></div></td>
         <td width="25%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">医疗机构名称</span></div></td>
-        <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">登录次数</span></div></td>
+        <td width="7%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">签订状态</span></div></td>
+        <td width="7%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">签约年份</span></div></td>
+        <td width="7%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">登录次数</span></div></td>
         <td width="15%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">最后登录时间</span></div></td>
         <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">最后登录IP</span></div></td>
       </tr>
       <c:forEach items="${page.list}" var="p" varStatus="status">
-		    <tr onmouseover="moves('')" onmouseout="outs('')" id="" >
-		        <td height="20" bgcolor="#FFFFFF"><div align="center">
+		    <tr class="dbclick" onmouseover="moves('${status.index+1}')" onmouseout="outs('${status.index+1}')" id="t${status.index+1}" <c:if test="${p.wq_valid==1}">bgcolor="#98F5FF"</c:if> >
+		        <td height="20" <c:if test="${p.wq_valid!=1}">bgcolor="#FFFFFF"</c:if> ><div align="center">
 					<input type="checkbox" name="cid"   value="${ status.index + 1}"/>
 		        </div></td>
-		        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${ status.index + 1}</div></td>
-		         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${p.name}</div></td>
-		         <td height="20" bgcolor="#FFFFFF" class="STYLE19">
+		        <td height="20" <c:if test="${p.wq_valid!=1}">bgcolor="#FFFFFF"</c:if> class="STYLE19"><div align="center">${ status.index + 1}</div></td>
+		         <td height="20" <c:if test="${p.wq_valid!=1}">bgcolor="#FFFFFF"</c:if> class="STYLE19"><div align="center" attr-val="${p.name}">${p.name}</div></td>
+		         <td height="20" <c:if test="${p.wq_valid!=1}">bgcolor="#FFFFFF"</c:if> class="STYLE19">
 		        	<div align="center" style="line-height: 25px;">
 						${p.password }
 					</div>
 				</td>
-		        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
+		        <td height="20" <c:if test="${p.wq_valid!=1}">bgcolor="#FFFFFF"</c:if> class="STYLE19">
 		       		<div align="center">
 			       		<c:choose>
 						    <c:when test="${p.uflag==1}"> 
@@ -215,22 +323,39 @@ $(document).ready(function(){
 		       		</div>
 		        </td>
 		        
-				<td height="20" bgcolor="#FFFFFF" class="STYLE19">
+				<td height="20" <c:if test="${p.wq_valid!=1}">bgcolor="#FFFFFF"</c:if> class="STYLE19">
 		        	<div align="center" style="line-height: 25px;">
 		        	    ${p.akb021 }
 					</div>
 				</td>
-		        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
+				 <td height="20" <c:if test="${p.wq_valid!=1}">bgcolor="#FFFFFF"</c:if> class="STYLE19">
+		       		<div align="center" attr-val="${p.wq_valid}">
+			       		<c:choose>
+						    <c:when test="${p.wq_valid==1}"> 
+						    	已签订
+						    </c:when>
+						    <c:otherwise>  
+						  	   	 未签订
+						    </c:otherwise>
+						 </c:choose>
+		       		</div>
+		        </td>
+		         <td height="20" <c:if test="${p.wq_valid!=1}">bgcolor="#FFFFFF"</c:if> class="STYLE19">
+		        	<div align="center" attr-val="${p.wq_year}">
+		        		${p.wq_year }
+		        	</div>
+		        </td>
+		        <td height="20" <c:if test="${p.wq_valid!=1}">bgcolor="#FFFFFF"</c:if> class="STYLE19">
 		        	<div align="center">
 		        		${p.times }
 		        	</div>
 		        </td>
-		        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
+		        <td height="20" <c:if test="${p.wq_valid!=1}">bgcolor="#FFFFFF"</c:if> class="STYLE19">
 		        	<div align="center">
 		        		${p.enddate }
 		        	</div>
 		        </td>
-		        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
+		        <td height="20" <c:if test="${p.wq_valid!=1}">bgcolor="#FFFFFF"</c:if> class="STYLE19">
 		        	<div align="center">
 		        		${p.ip }
 		        	</div>
@@ -252,10 +377,10 @@ $(document).ready(function(){
         </td>
         <td width="67%"><table width="312" border="0" align="right" cellpadding="0" cellspacing="0">
           <tr>
-            <td width="49"><div align="center"><a href="<%=basePath %>servlet/UserManagerServlet?page=1" style="cursor:hand" id="begin"><img src="<%=basePath %>images/main_54.gif" width="40" height="15" /></a></div></td>
-            <td width="49"><div align="center"><a href="<%=basePath %>servlet/UserManagerServlet?page=${page.current-1}" style="cursor:hand" id="before"><img src="<%=basePath %>images/main_56.gif" width="45" height="15" /></a></div></td>
-            <td width="49"><div align="center"><a href="<%=basePath %>servlet/UserManagerServlet?page=${page.current+1}" style="cursor:hand" id="next"><img src="<%=basePath %>images/main_58.gif" width="45" height="15" /></a></div></td>
-            <td width="49"><div align="center"><a href="<%=basePath %>servlet/UserManagerServlet?page=${page.count}" style="cursor:hand" id="end"><img src="<%=basePath %>images/main_60.gif" width="40" height="15" /></a></div></td>
+            <td width="49"><div align="center"><a href="<%=basePath %>servlet/UserManagerServlet?page=1&akb020=${akb020}&akb021=${akb021}&WQ_YEAR=${WQ_YEAR}&type=${type}" style="cursor:hand" id="begin"><img src="<%=basePath %>images/main_54.gif" width="40" height="15" /></a></div></td>
+            <td width="49"><div align="center"><a <c:if test="${page.current!=1}">href="<%=basePath %>servlet/UserManagerServlet?page=${page.current-1}&akb020=${akb020}&akb021=${akb021}&WQ_YEAR=${WQ_YEAR}&type=${type}"</c:if>  style="cursor:hand" id="before"><img src="<%=basePath %>images/main_56.gif" width="45" height="15" /></a></div></td>
+            <td width="49"><div align="center"><a href="<%=basePath %>servlet/UserManagerServlet?page=${page.current+1}&akb020=${akb020}&akb021=${akb021}&WQ_YEAR=${WQ_YEAR}&type=${type}" style="cursor:hand" id="next"><img src="<%=basePath %>images/main_58.gif" width="45" height="15" /></a></div></td>
+            <td width="49"><div align="center"><a href="<%=basePath %>servlet/UserManagerServlet?page=${page.count}&akb020=${akb020}&akb021=${akb021}&WQ_YEAR=${WQ_YEAR}&type=${type}" style="cursor:hand" id="end"><img src="<%=basePath %>images/main_60.gif" width="40" height="15" /></a></div></td>
             <td width="37" class="STYLE22"><div align="center">转到</div></td>
             <td width="22"><div align="center">
               <input type="text" name="topg" id="topg"  style="width:25px; height:14px; font-size:12px; border:solid 1px #7aaebd;"/>

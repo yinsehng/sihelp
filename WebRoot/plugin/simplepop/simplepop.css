@@ -20,6 +20,8 @@
     background: #fff url(images/error.gif) no-repeat 0 50%; }
   .popMain .confirm_icon {
     background: #fff url(images/edit.png) no-repeat 0 50%;}
+   .popMain .print_icon {
+    background: #fff url(images/man.png) no-repeat 0 50%;}
 
 .popTitle {
   background: teal;

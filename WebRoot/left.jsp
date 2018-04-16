@@ -82,9 +82,9 @@ function unopen(){
 			<div class="STYLE4" style="height: 30px;padding-top: 8px;width: 95%;cursor:hand" onMouseOver="this.style.backgroundImage='url(<%=basePath%>images/tab_bg.gif)';this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#adb9c2'; "onmouseout="this.style.backgroundImage='url()';this.style.borderStyle='none'"><a href="<%=basePath%>servlet/JInfoMangerServlet" target="cent">甲方信息管理</a></div>
 		</div>
 		<div height="38px;width:100%;">
-			<div style="width:20%;height: 30px;margin-left: 15px;margin-top: 2px;float: left;background-image:url('<%=basePath%>images/main_48.gif');"></div>
+			<div style="width:20%;height: 30px;margin-left: 15px;margin-top: 2px;float: left;background-image:url('<%=basePath%>images/main_52.gif');"></div>
 			<div style="float: left;width:5px;height: 30px;"></div>
-			<div class="STYLE4" style="height: 30px;padding-top: 8px;width: 95%;cursor:hand" onMouseOver="this.style.backgroundImage='url(<%=basePath%>images/tab_bg.gif)';this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#adb9c2'; "onmouseout="this.style.backgroundImage='url()';this.style.borderStyle='none'"><a href="<%=basePath%>servlet/UserManagerServlet" target="cent">用户信息管理</a></div>
+			<div class="STYLE4" style="height: 30px;padding-top: 8px;width: 95%;cursor:hand" onMouseOver="this.style.backgroundImage='url(<%=basePath%>images/tab_bg.gif)';this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#adb9c2'; "onmouseout="this.style.backgroundImage='url()';this.style.borderStyle='none'"><a href="<%=basePath%>servlet/UserManagerServlet" target="cent">医疗机构管理</a></div>
 		</div>
 		<div height="38px;width:100%;">
 			<div style="width:20%;height: 30px;margin-left: 15px;margin-top: 2px;float: left;;background-image:url('<%=basePath%>images/main_40.gif');"></div>

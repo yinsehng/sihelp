@@ -329,7 +329,7 @@ $(document).ready(function(){
     		      		      	    	if (result == "repeat") {
     		      		      	    		 SimplePop.confirm("您今年已经签署过协议，如需重新签订请联系管理员!",
     		      									  {
-    		      								  		type: "confirm",
+    		      								  		type: "error",
     		      								  		title: "提示",
     		      								  		opacity: 0.2,
     		      									  });

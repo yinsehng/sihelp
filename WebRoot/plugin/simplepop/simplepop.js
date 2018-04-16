@@ -52,6 +52,23 @@ var SimplePop = {
 		this._creatLayer(opt)
 
 	},
+	print: function(msg, arg) {
+		var obj = eval('(' + msg + ')');
+		var promptDefaults = {
+			popType: "print",
+			title: "签订协议人员基本信息",
+			content: "<div class='layer_msg'><div>填报人姓名：<input type='text' readonly value='"+obj.aac003+"'/></div><div>身份证号：<input type='text' readonly value='"+obj.aac002+"'/></div><div>联系电话：<input type='text' readonly value="+obj.aac005+" /></div><div>填写时间：<input type='text' readonly value='"+obj.aae036+"'/></div></div>",
+			cancel: function() {
+				
+			},
+			confirm: function(value) {
+				
+			}
+		};
+		var opt = $.extend({}, this._defaults, promptDefaults, arg);
+		this._creatLayer(opt)
+
+	},
 	closeSimplePop: function() {
 		this._closeLayer();
 	},
@@ -173,8 +190,22 @@ var SimplePop = {
 				$("#save").bind("click",
 						function() {
 							opt.confirm($(".layer_msg input").val())
-							
 						});
+				break;
+			case "print":
+				$popMain.fadeIn(opt.duration, function() {
+					$popMain.attr("style", $popMain.attr("style").replace("FILTER:", ""))
+				});
+				$("#simplePopBtnSure").bind("click",
+					function() {
+						opt.confirm($(".layer_msg input").val())
+						self._closeLayer()
+					});
+				$("#SimplePopBtncancel").bind("click", function() {
+					opt.cancel()
+					self._closeLayer()
+				});
+				
 				break;
 			default:
 				break;

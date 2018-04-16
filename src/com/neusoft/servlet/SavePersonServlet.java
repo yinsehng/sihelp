@@ -53,6 +53,7 @@ public class SavePersonServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		String time = TimeUtil.getCurrentDate("yyyy-MM-dd HH:mm:ss");
 		String name = request.getParameter("name");
 		name = new String(name.getBytes("iso8859-1"), "utf-8");
 		String card = request.getParameter("card");
@@ -77,7 +78,7 @@ public class SavePersonServlet extends HttpServlet {
 		try {
 			con=cm.getConnection();
 			st=con.createStatement();
-			String saveSql = "insert into protocoluser values('"+AKB020+"','"+AKB021+"','"+name+"','"+card+"','"+tel+"',sysdate,'"+YEAR+"','1')";
+			String saveSql = "insert into protocoluser values('"+AKB020+"','"+AKB021+"','"+name+"','"+card+"','"+tel+"','"+time+"','"+YEAR+"','1')";
 			int result = st.executeUpdate(saveSql);
 			con.commit();
 			if(result > 0){

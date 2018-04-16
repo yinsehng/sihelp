@@ -11,9 +11,23 @@ public class User {
 	public String akb021;
 	public int type;//用户类型 1管理员 0定点
 	public String uflag;//1医院2药店
+	public String wq_valid;
+	public String wq_year;
 	
 	
 	
+	public String getWq_year() {
+		return wq_year;
+	}
+	public void setWq_year(String wq_year) {
+		this.wq_year = wq_year;
+	}
+	public String getWq_valid() {
+		return wq_valid;
+	}
+	public void setWq_valid(String wq_valid) {
+		this.wq_valid = wq_valid;
+	}
 	public String getUflag() {
 		return uflag;
 	}
@@ -66,7 +80,9 @@ public class User {
 	public String toString() {
 		return "User [name=" + name + ", password=" + password + ", ip=" + ip
 				+ ", enddate=" + enddate + ", times=" + times + ", akb021="
-				+ akb021 + ", type=" + type + ", uflag=" + uflag + "]";
+				+ akb021 + ", type=" + type + ", uflag=" + uflag
+				+ ", wq_valid=" + wq_valid + ", wq_year=" + wq_year + "]";
 	}
+	
 	
 }

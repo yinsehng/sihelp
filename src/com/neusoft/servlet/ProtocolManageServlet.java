@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.neusoft.bean.Course;
-import com.neusoft.bean.Operator;
 import com.neusoft.bean.Protocol;
 import com.neusoft.bean.User;
 import com.neusoft.jdbc.ConnectionManager;
@@ -46,7 +44,7 @@ public class ProtocolManageServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String type = (String)request.getParameter("type");
 		String WQ_YEAR = (String)request.getParameter("WQ_YEAR");
-		
+		String sql_ = "";
 		//获取session
 		HttpSession session=request.getSession();
 		//登录用户
@@ -54,6 +52,12 @@ public class ProtocolManageServlet extends HttpServlet {
 		if (u == null) {
 			request.getRequestDispatcher("../index.jsp?out=ok").forward(request, response);
 			return;
+		}
+		if (!"".equals(type)&& type != null) {
+			sql_+=" and type = '"+type+"'";
+		}
+		if (!"".equals(WQ_YEAR)&&WQ_YEAR!=null) {
+			sql_+=" and WQ_YEAR = '"+WQ_YEAR+"'";
 		}
 		//数据连接mysql
 		ConnectionManager cm= ConnectionManager.getInstance();
@@ -78,7 +82,7 @@ public class ProtocolManageServlet extends HttpServlet {
 		     
 		
 		try {
-			String sqlc="select count(*) as count from PROTOCOL where 1=1 and WQ_VALID = 1";
+			String sqlc="select count(*) as count from PROTOCOL where 1=1 and WQ_VALID = 1 " + sql_;
 			con=cm.getConnection();
 			st=con.createStatement();
 			rs=st.executeQuery(sqlc);
@@ -93,7 +97,7 @@ public class ProtocolManageServlet extends HttpServlet {
 			if (!"".equals(WQ_YEAR) && WQ_YEAR != null) {
 				sql = sql + " and WQ_YEAR = '"+WQ_YEAR+"'";
 			}
-			sql=sql+") A WHERE ROWNUM <= "+(((dqy-1)*mys)+mys)+") WHERE RN > "+((dqy-1)*mys);
+			sql=sql+" order by WQ_TIME desc) A WHERE ROWNUM <= "+(((dqy-1)*mys)+mys)+") WHERE RN > "+((dqy-1)*mys);
 			
 				
 			rs = st.executeQuery(sql);
