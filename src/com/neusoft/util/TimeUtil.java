@@ -12,6 +12,9 @@ public class TimeUtil {
 		return new SimpleDateFormat(formate).format(date);
 	}
 	
+	public static String getDate(String strdate){
+		return new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ").format(convertStringToDate(strdate, "yyyy-MM-dd"));
+	}
 	public static Date convertStringToDate(String strdate, String format) {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 	    Date date = null;

@@ -7,6 +7,13 @@
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	String flag = (String)request.getAttribute("flag");
 	Protocol protocol = (Protocol)request.getAttribute("protocol");
+	String valid = "0";
+	String WQ_DATE="";
+	if (protocol!=null) {
+		valid = protocol.getWQ_VALID();
+		WQ_DATE = protocol.getWQ_TIME();
+		WQ_DATE = TimeUtil.getDate(WQ_DATE);
+	}
 	Kb01 kb01 = (Kb01)request.getAttribute("kb01");
 	Jinfo jinfo = (Jinfo)request.getAttribute("jinfo");
 	String tel = jinfo.getTEL();
@@ -489,7 +496,6 @@ function getYear(){
 </head>
 <body>
 
-
 <div class="protocol" align="center" style="width:95%;position: absolute;display: block;">
    <div class="common" style="width:100%;margin-top: 10px;">
        <div id="protocol_heard_left" style="width:5%;padding-left: 32%;float: left;font-size: 12px;font-weight: bold;" align="left">医保编号</div>
@@ -955,7 +961,21 @@ function getYear(){
         </div>
         <div style="padding-top: 3px;" align="left">
         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	<font style="font-weight: bold;">第三十四条</font>  本协议有效期自<%=year %>年 01 月 01 日起至<%=year %>年12月31日止。本协议一
+        	<font style="font-weight: bold;">第三十四条</font> 
+        	<% 
+        		if ("0".equals(valid)) {
+        			%>
+        			本协议有效期自<%=year%>年01月01日起至<%=year %>年12月31日止。
+        			<%
+        		}else {
+        			%>
+        			本协议有效期自<%=WQ_DATE%>起至<%=year %>年12月31日止。
+        			<%
+        		}
+        	%> 
+        	
+        	
+        	本协议一
         </div>
         <div style="padding-top: 3px;" align="left">
         	式两份，甲乙双方各执一份，具有同等效力。

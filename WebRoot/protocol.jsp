@@ -7,6 +7,13 @@
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	String flag = (String)request.getAttribute("flag");
 	Protocol protocol = (Protocol)request.getAttribute("protocol");
+	String valid = "0";
+	String WQ_DATE="";
+	if (protocol!=null) {
+		valid = protocol.getWQ_VALID();
+		WQ_DATE = protocol.getWQ_TIME();
+		WQ_DATE = TimeUtil.getDate(WQ_DATE);
+	}
 	Kb01 kb01 = (Kb01)request.getAttribute("kb01");
 	Jinfo jinfo = (Jinfo)request.getAttribute("jinfo");
 	String tel = jinfo.getTEL();
@@ -1830,7 +1837,18 @@ function CheckIsInstall() {
         </div>
         <div style="padding-top: 3px;" align="left">
         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              第六十三条  本协议有效期自<%=year %>年 01月 01日起至<%=year %>年12月31日止。
+                              第六十三条 
+             <% 
+        		if ("0".equals(valid)) {
+        			%>
+        			本协议有效期自<%=year%>年01月01日起至<%=year%>年12月31日止。
+        			<%
+        		}else {
+        			%>
+        			本协议有效期自<%=WQ_DATE%>起至<%=year %>年12月31日止。
+        			<%
+        		}
+        	%> 
         </div>
         <div style="padding-top: 3px;" align="left">
         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
