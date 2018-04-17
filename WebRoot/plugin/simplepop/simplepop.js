@@ -72,6 +72,22 @@ var SimplePop = {
 	closeSimplePop: function() {
 		this._closeLayer();
 	},
+	load: function(msg, arg) {
+		var promptDefaults = {
+			popType: "load",
+			title: "下载",
+			content: "<div class='layer_msg'><p>" + (msg === undefined ? "" : msg) + "</p></div>",
+			cancel: function() {
+				
+			},
+			confirm: function(value) {
+				
+			}
+		};
+		var opt = $.extend({}, this._defaults, promptDefaults, arg);
+		this._creatLayer(opt)
+
+	},
 	_defaults: {
 		icon: "",
 		title: "",
@@ -193,6 +209,21 @@ var SimplePop = {
 						});
 				break;
 			case "print":
+				$popMain.fadeIn(opt.duration, function() {
+					$popMain.attr("style", $popMain.attr("style").replace("FILTER:", ""))
+				});
+				$("#simplePopBtnSure").bind("click",
+					function() {
+						opt.confirm($(".layer_msg input").val())
+						self._closeLayer()
+					});
+				$("#SimplePopBtncancel").bind("click", function() {
+					opt.cancel()
+					self._closeLayer()
+				});
+				
+				break;
+			case "load":
 				$popMain.fadeIn(opt.duration, function() {
 					$popMain.attr("style", $popMain.attr("style").replace("FILTER:", ""))
 				});

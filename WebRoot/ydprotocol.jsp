@@ -191,7 +191,7 @@ $(document).ready(function(){
 	      	    		SimplePop.confirm("您今年还未签署协议不能进行打印，请确认!",
 								  {
 							  		type: "error",
-							  		title: "错误提示",
+							  		title: "安装下载",
 							  		opacity: 0.2,
 							  		cancel: function(){
 					                 }

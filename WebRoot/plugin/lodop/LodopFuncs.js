@@ -8,12 +8,12 @@ function getLodop(oOBJECT,oEMBED){
   如果页面没有相关对象元素，则新建一个或使用上次那个,避免重复生成。
   64位浏览器指向64位的安装程序install_lodop64.exe。
 **************************/
-        var strHtmInstall="<br><font color='#FF00FF'>打印控件未安装!点击这里<a href='install_lodop32.exe' target='_self'>执行安装</a>,安装后请刷新页面或重新进入。</font>";
-        var strHtmUpdate="<br><font color='#FF00FF'>打印控件需要升级!点击这里<a href='install_lodop32.exe' target='_self'>执行升级</a>,升级后请重新进入。</font>";
-        var strHtm64_Install="<br><font color='#FF00FF'>打印控件未安装!点击这里<a href='install_lodop64.exe' target='_self'>执行安装</a>,安装后请刷新页面或重新进入。</font>";
-        var strHtm64_Update="<br><font color='#FF00FF'>打印控件需要升级!点击这里<a href='install_lodop64.exe' target='_self'>执行升级</a>,升级后请重新进入。</font>";
-        var strHtmFireFox="<br><br><font color='#FF00FF'>（注意：如曾安装过Lodop旧版附件npActiveXPLugin,请在【工具】->【附加组件】->【扩展】中先卸它）</font>";
-        var strHtmChrome="<br><br><font color='#FF00FF'>(如果此前正常，仅因浏览器升级或重安装而出问题，需重新执行以上安装）</font>";
+        var strHtmInstall="<br><font size='2' color='#FF00FF'>打印控件未安装!点击这里<a href='install_lodop32.exe' target='_self'>执行安装</a>,安装后请刷新页面或重新进入。</font>";
+        var strHtmUpdate="<br><font size='2' color='#FF00FF'>打印控件需要升级!点击这里<a href='install_lodop32.exe' target='_self'>执行升级</a>,升级后请重新进入。</font>";
+        var strHtm64_Install="<br><font size='2' color='#FF00FF'>打印控件未安装!点击这里<a href='install_lodop64.exe' target='_self'>执行安装</a>,安装后请刷新页面或重新进入。</font>";
+        var strHtm64_Update="<br><font size='2' color='#FF00FF'>打印控件需要升级!点击这里<a href='install_lodop64.exe' target='_self'>执行升级</a>,升级后请重新进入。</font>";
+        var strHtmFireFox="<br><br><font size='2' color='#FF00FF'>（注意：如曾安装过Lodop旧版附件npActiveXPLugin,请在【工具】->【附加组件】->【扩展】中先卸它）</font>";
+        var strHtmChrome="<br><br><font size='2' color='#FF00FF'>(如果此前正常，仅因浏览器升级或重安装而出问题，需重新执行以上安装）</font>";
         var LODOP;		
 	try{	
 	     //=====判断浏览器类型:===============
@@ -40,13 +40,53 @@ function getLodop(oOBJECT,oEMBED){
 	     };
 	     //=====判断Lodop插件是否安装过，没有安装或版本过低就提示下载安装:==========
 	     if ((LODOP==null)||(typeof(LODOP.VERSION)=="undefined")) {
+	    	 
 	             if (navigator.userAgent.indexOf('Chrome')>=0)
-	                 document.documentElement.innerHTML=strHtmChrome+document.documentElement.innerHTML;
+	                 //document.documentElement.innerHTML=strHtmChrome+document.documentElement.innerHTML;
 	             if (navigator.userAgent.indexOf('Firefox')>=0)
 	                 document.documentElement.innerHTML=strHtmFireFox+document.documentElement.innerHTML;
-	             if (is64IE) document.write(strHtm64_Install); else
-	             if (isIE)   document.write(strHtmInstall);    else
-	                 document.documentElement.innerHTML=strHtmInstall+document.documentElement.innerHTML;
+	             if (is64IE) //document.write(strHtm64_Install); 
+	            	 SimplePop.load(strHtm64_Install,
+							  {
+						  		type: "load",
+						  		title: "下载提示",
+						  		opacity: 0.2,
+						  		cancel: function(){
+				                  
+				              },
+				              confirm: function(){
+				              	
+				              }
+							  });
+	             else if (isIE){
+	            	 //document.write(strHtmInstall); 
+	            	 SimplePop.load(strHtmInstall,
+							  {
+						  		type: "load",
+						  		title: "下载提示",
+						  		opacity: 0.2,
+						  		cancel: function(){
+				                  
+				              },
+				              confirm: function(){
+				              	
+				              }
+							  });
+	             }else {
+	            	
+	            	 //document.documentElement.innerHTML=strHtmInstall+document.documentElement.innerHTML;
+	            	 SimplePop.load(strHtmInstall,
+							  {
+						  		type: "load",
+						  		title: "下载提示",
+						  		opacity: 0.2,
+						  		cancel: function(){
+				                  
+				              },
+				              confirm: function(){
+				              }
+							  });
+	             }
 	             return LODOP;
 	     } else 
 	     if (LODOP.VERSION<"6.1.9.8") {
@@ -61,9 +101,35 @@ function getLodop(oOBJECT,oEMBED){
 	     //============================================================	     
 	     return LODOP; 
 	} catch(err) {
-	     if (is64IE)	
-            document.documentElement.innerHTML="Error:"+strHtm64_Install+document.documentElement.innerHTML;else
-            document.documentElement.innerHTML="Error:"+strHtmInstall+document.documentElement.innerHTML;
+	     if (is64IE){
+	    	 //document.documentElement.innerHTML="Error:"+strHtm64_Install+document.documentElement.innerHTML;
+	    	 SimplePop.load(strHtm64_Install,
+					  {
+				  		type: "load",
+				  		title: "下载提示",
+				  		opacity: 0.2,
+				  		cancel: function(){
+		                  
+		              },
+		              confirm: function(){
+		              	
+		              }
+					  });
+	     }else{
+	    	 //document.documentElement.innerHTML="Error:"+strHtmInstall+document.documentElement.innerHTML;
+	    	 SimplePop.load(strHtmInstall,
+					  {
+				  		type: "load",
+				  		title: "下载提示",
+				  		opacity: 0.2,
+				  		cancel: function(){
+		                  
+		              },
+		              confirm: function(){
+		              	
+		              }
+					  });
+	     }
 	     return LODOP; 
 	};
 }

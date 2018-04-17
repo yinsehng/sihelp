@@ -5,17 +5,16 @@
     Integer TOTALNUM = (Integer)request.getAttribute("TOTALNUM");
     Integer VALIDNUM = (Integer)request.getAttribute("VALIDNUM");
     Integer NOVALIDNUM = TOTALNUM - VALIDNUM;
+    String series = (String)request.getAttribute("series");
+    String xAxis = (String)request.getAttribute("xAxis");
+    String WQ_YEAR = (String)request.getAttribute("WQ_YEAR");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>定点医药机构服务协议网签系统</title>
-<script type="text/javascript" src="<%=basePath %>plugin/jquery/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="<%=basePath %>plugin/corechart/js/jsapi.js"></script>
-<script type="text/javascript" src="<%=basePath %>plugin/corechart/js/corechart.js"></script>		
-<script type="text/javascript" src="<%=basePath %>plugin/corechart/js/jquery.gvChart-1.0.1.min.js"></script>
-<script type="text/javascript" src="<%=basePath %>plugin/corechart/js/jquery.ba-resize.min.js"></script>
+<script type="text/javascript" src="<%=basePath %>plugin/echarts/echarts-all.js"></script>			
 <style type="text/css">
 <!--
 body {
@@ -53,27 +52,6 @@ ul,li{padding: 0px;margin: 0px; border: 0px;}
 .notr td{background-color: #ffffff;}
 .text{width: 200px;padding: 2px;}
 </style>
-<script type="text/javascript">
-(function($){
-    $.fn.placeholder = function(options){
-        var opts = $.extend({}, $.fn.placeholder.defaults, options);
-        var isIE = document.all ? true : false;
-        return this.each(function(){
-            var _this = this,
-                placeholderValue =_this.getAttribute("placeholder"); //缓存默认的placeholder值
-            if(isIE){
-                _this.setAttribute("value",placeholderValue);
-                _this.onfocus = function(){
-                    $.trim(_this.value) == placeholderValue ? _this.value = "" : '';
-                };
-                _this.onblur = function(){
-                    $.trim(_this.value) == "" ? _this.value = placeholderValue : '';
-                };
-            }
-        });
-    };
-})(jQuery);
-</script>
 </head>
 
 <body>
@@ -108,60 +86,155 @@ ul,li{padding: 0px;margin: 0px; border: 0px;}
   </tr>
   <tr>
 	 <td height="40" bgcolor="#FFFFFF" class="STYLE6"  style="text-align: left;" colspan="2">
-          <div style="width: 30%;float: left;padding:10px 0px 10px 30px;"> 
-			<ul>
-			  <li>网签年份：<input placeholder="请输入用查询年份" type="text" class="text" name="WQ_YEAR" value=""/></li>
-			</ul>
-		   </div>
-		   <div style="width: 30%;float: left; margin-top: 10px;"> 
-		     <div style="float: left;width: 20%">
-		       <input type="submit" value="查询"/><p/>
-		     </div>
-		   </div>
+          <div style="width: 95%;height:40%;float: left;padding:0px 0px 10px 30px;"> 
+			 <div style="width:20%;height:100%;float: left;"></div>
+			 <div style="width:20%;height:100%;float: left;margin-left: 5px;"></div>
+			 <div style="width:20%;height:100%;float: left;margin-left: 5px;">
+			 	网签年份：<input placeholder="请输入用查询年份" type="text" class="text" style="width: 150px;" name="WQ_YEAR" value="<%=WQ_YEAR %>"/>
+			 </div>
+			 <div style="width:20%;height:100%;float: left;margin-left: 5px;">
+			 	<input type="submit" value="查询"/><p/>
+			 </div>
+			 <div style="width:15%;height:100%;float: left;margin-left: 5px;"></div>
+		  </div>
 		</td>
   </tr>
   <tr>
-    <td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce" >
-    	
-
-	   <table id='myTable1'>
-			<caption>网签协议签署情况统计(共<%=TOTALNUM %>)</caption>
-			<thead>
-				<tr>
-					<th></th>
-					<th>已签署(<%=VALIDNUM %>)</th>
-					<th>未签署(<%=NOVALIDNUM %>)</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th><%=TOTALNUM %></th>
-					<td><%=VALIDNUM %></td>
-					<td><%=NOVALIDNUM %></td>
-				</tr>
-			</tbody>
-		</table>  
-	
-    	
-    </table></td>
   </tr>
 </table>
+	<div style="width: 100%;height: 70%;">
+    	<div style="width: 50%;height: 100%;float:left;">
+    		<div id="main" style="height:100%;border:1px solid #ccc;"></div>
+    	</div>
+    	<div style="width: 45%;height: 100%;float:left;">
+    		<div id="main2" style="height:100%;border:1px solid #ccc;"></div>
+    	</div>
+    	
+	</div>
 </form>
 <script type="text/javascript">
-gvChartInit();
-$(document).ready(function(){
-		$('#myTable1').gvChart({
-			chartType: 'PieChart',
-			gvSettings: {
-			vAxis: {title: 'No of players'},
-			hAxis: {title: 'Month'},
-			width: 600,
-			height: 350
-		}
-	});
+//图表实例化------------------
+//srcipt标签式引入
+var myChart = echarts.init(document.getElementById('main'));
+
+//过渡---------------------
+myChart.showLoading({
+ text: '正在努力的读取数据中...',    //loading话术
 });
-$(".text").placeholder();
-</script>
+
+
+myChart.hideLoading();
+
+//图表使用-------------------
+var option = {
+    title : {
+        text: '哈尔滨医疗机构网签占比统计',
+        subtext: '<%=WQ_YEAR%>',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : 'left',
+        data:['已签订','未签订']
+    },
+    toolbox: {
+        show : true,
+        x:450,
+        feature : {
+            mark : {show: false},
+            dataView : {show: true, readOnly: false},
+            magicType : {
+                show: true, 
+                type: ['pie', 'funnel'],
+                option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }
+            },
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'访问来源',
+            type:'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:<%=VALIDNUM%>, name:'已签订'},
+                {value:<%=NOVALIDNUM%>, name:'未签订'}
+            ]
+        }
+    ]
+};
+myChart.setOption(option);
+//srcipt标签式引入
+var myChart2 = echarts.init(document.getElementById('main2'));
+
+//过渡---------------------
+myChart2.showLoading({
+ text: '正在努力的读取数据中...',    //loading话术
+});
+
+
+myChart2.hideLoading();
+
+//图表使用-------------------
+var option2 = {
+		title : {
+	        text: '哈尔滨医疗机构网签趋势统计',
+	        subtext: '<%=WQ_YEAR%>',
+	        x:'center'
+	    },
+	    toolbox: {
+	        show : true,
+	        x:390,
+	        feature : {
+	            mark : {show: false},
+	            dataView : {show: true, readOnly: false},
+	            magicType : {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+ tooltip: {                                  // 气泡提示配置
+     trigger: 'item',                        // 触发类型，默认数据触发，可选为：'axis'
+ },
+ xAxis: [                                    // 直角坐标系中横轴数组
+     {
+         type: 'category',                   // 坐标轴类型，横轴默认为类目轴，数值轴则参考yAxis说明
+         data: [<%=xAxis%>]
+     }
+ ],
+ yAxis: [                                    // 直角坐标系中纵轴数组
+     {
+         type: 'value',                      // 坐标轴类型，纵轴默认为数值轴，类目轴则参考xAxis说明
+         boundaryGap: [1, 1],            // 坐标轴两端空白策略，数组内数值代表百分比
+         splitNumber: 4,                      // 数值轴用，分割段数，默认为5
+         min:0
+     }
+ ],
+ series: [
+     {
+         name: '签订数',                        // 系列名称
+         type: 'line',                       // 图表类型，折线图line、散点图scatter、柱状图bar、饼图pie、雷达图radar
+         data: [<%=series%>]
+     }
+ ]
+};
+myChart2.setOption(option2);
+    </script>
+
 </body>
 </html>
 

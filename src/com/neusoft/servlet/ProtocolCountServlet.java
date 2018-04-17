@@ -43,7 +43,10 @@ public class ProtocolCountServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String WQ_YEAR = (String)request.getParameter("WQ_YEAR")==null?TimeUtil.getCurrentDate("yyyy"):(String)request.getParameter("WQ_YEAR");
+		String WQ_YEAR = (String)request.getParameter("WQ_YEAR");
+		if (WQ_YEAR == null || "".equals(WQ_YEAR)) {
+			WQ_YEAR = TimeUtil.getCurrentDate("yyyy");
+		}
 		//获取session
 		HttpSession session=request.getSession();
 		//登录用户
@@ -58,6 +61,8 @@ public class ProtocolCountServlet extends HttpServlet {
 		Connection con=null;
 		Statement st=null;
 		ResultSet rs=null;
+		StringBuilder xAxis = new StringBuilder();
+		StringBuilder series = new StringBuilder();
 		int VALIDNUM = 0;
 		int TOTALNUM = 0;
 		try {
@@ -75,6 +80,21 @@ public class ProtocolCountServlet extends HttpServlet {
 				request.setAttribute("TOTALNUM", TOTALNUM);
 			}
 			
+			rs = st.executeQuery("select count(*) NUM,WQ_DATE from (select A.*,substr(wq_time,0,10 ) wq_date from protocol A where A.wq_valid = 1 and A.wq_year = '"+WQ_YEAR+"') group by wq_date order by wq_date");
+			while(rs.next()){
+				
+				series.append(rs.getInt("NUM")).append(",");
+				xAxis.append("\"").append(rs.getString("WQ_DATE")).append("\"").append(",");
+			}
+			if (series != null&&series.length()>0) {
+				series.deleteCharAt(series.lastIndexOf(","));
+			}
+			if (xAxis != null&&series.length()>0) {
+				xAxis.deleteCharAt(xAxis.lastIndexOf(","));
+			}
+			request.setAttribute("series", series.toString());
+			request.setAttribute("xAxis", xAxis.toString());
+			request.setAttribute("WQ_YEAR", WQ_YEAR);
 			request.getRequestDispatcher("../protocolcount.jsp").forward(request, response);
 			
 		} catch (SQLException e) {
