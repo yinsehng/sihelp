@@ -311,7 +311,7 @@ function timer() {
 		        	</div>
 		        </td>
 		        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
-		        	<div align="left">
+		        	<div align="left" style="margin-top: 5px;">
 				        <input style="margin-left: 5px;" type="button" value="修改信息" onclick="editProtocol(${p.AKB020},${p.WQ_YEAR});"/>&nbsp;&nbsp;
 				        <input type="button" value="打印" onclick="printProtocol(${p.AKB020},${p.WQ_YEAR});"/>&nbsp;&nbsp;
 		        	</div>

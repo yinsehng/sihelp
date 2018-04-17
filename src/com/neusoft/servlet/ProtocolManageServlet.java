@@ -67,6 +67,7 @@ public class ProtocolManageServlet extends HttpServlet {
 		
 		String dqys=request.getParameter("page");
 		Page<Protocol> page=new Page<Protocol>();
+		page.setPer(6);
 		ArrayList<Protocol> list = new ArrayList<Protocol>();
 		  //·ÖÒ³
 	    int dqy;
