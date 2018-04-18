@@ -1,10 +1,11 @@
-<%@ page language="java" import="java.util.*,com.neusoft.util.*,com.neusoft.bean.*" pageEncoding="utf-8"%>
+<%@page import="com.neusoft.util.TimeUtil"%>
+<%@page import="com.neusoft.bean.User"%>
+<%@ page language="java" pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 pageContext.setAttribute("basePath",basePath);
 %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -47,8 +48,6 @@ body {
 		window.setTimeout(timer, 1000);
 	}
 	function block(){
-	  //ymPrompt.alert({message:'http://www.qq.com',title:'确认要提交吗?',handler:function(){alert('good')}});
-	  //ymPrompt.win({title:'操作处理单',width:408,height:240,fixPosition:true,maxBtn:true,minBtn:true,iframe:{id:'myId',name:'myName',src:'<%=basePath%>admin/upduser.jsp'}});
 	   var i=window.showModalDialog('<%=basePath%>upduser.jsp','修改密码','dialogWidth:350px;dialogHeight:200px;center:yes;help:no;resizable:no;status:no');
 	}
 	function unopen(){
@@ -101,11 +100,11 @@ body {
             <td width="21"><img src="<%=basePath%>images/main_13.gif" width="19" height="14" /></td>
             <td width="35" class="STYLE7"><div align="center"><a href="<%=basePath%>right.jsp"  target="cent">首页</a></div></td>
             <td width="21" class="STYLE7"><img src="<%=basePath%>images/main_15.gif" width="19" height="14" /></td>
-            <td width="35" class="STYLE7"><div align="center"><a href="#" onclick="javascript:history.go(-1)">后退</a> </div></td>
+            <td width="35" class="STYLE7"><div align="center"><a href="#" onclick="javascript:history.go(-1);">后退</a> </div></td>
             <td width="21" class="STYLE7"><img src="<%=basePath%>images/main_17.gif" width="19" height="14" /></td>
-            <td width="35" class="STYLE7"><div align="center"><a href="#" onclick=history.go(1)>前进</a></div></td>
+            <td width="35" class="STYLE7"><div align="center"><a href="#" onclick="history.go(1);">前进</a></div></td>
             <td width="21" class="STYLE7"><img src="<%=basePath%>images/main_19.gif" width="19" height="14" /></td>
-            <td width="35" class="STYLE7"><div align="center"><a href="#" onclick=history.go(0)>刷新</a></div></td>
+            <td width="35" class="STYLE7"><div align="center"><a href="#" onclick="history.go(0);">刷新</a></div></td>
             <td width="21" class="STYLE7"><img src="<%=basePath%>images/main_21.gif" width="19" height="14" /></td>
             <td width="35" class="STYLE7"><div align="center">帮助</div></td>
             <td>&nbsp;</td>
@@ -132,7 +131,7 @@ body {
             <td width="33%">&nbsp;</td>
           </tr>
         </table></td>
-        <td width="39"><img src="<%=basePath%>images/main_30.gif" width="39" height="30" style="cursor: pointer;" onclick="show()"/></td>
+        <td width="39"><img src="<%=basePath%>images/main_30.gif" width="39" height="30" style="cursor: pointer;" onclick="show();"/></td>
         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <%User u=(User)session.getAttribute("user"); %>

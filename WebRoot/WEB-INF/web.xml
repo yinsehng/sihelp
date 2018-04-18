@@ -134,10 +134,6 @@
   <servlet-class>com.neusoft.servlet.UpdYa02Servlet</servlet-class>
  </servlet>
  <servlet>
-  <servlet-name>AjaxCountServlet</servlet-name>
-  <servlet-class>com.neusoft.servlet.AjaxCountServlet</servlet-class>
- </servlet>
- <servlet>
   <servlet-name>SelKb01Servlet</servlet-name>
   <servlet-class>com.neusoft.servlet.SelKb01Servlet</servlet-class>
  </servlet>
@@ -339,10 +335,6 @@
  <servlet-mapping>
   <servlet-name>UpdYa02Servlet</servlet-name>
   <url-pattern>/servlet/UpdYa02Servlet</url-pattern>
- </servlet-mapping>
- <servlet-mapping>
-  <servlet-name>AjaxCountServlet</servlet-name>
-  <url-pattern>/servlet/AjaxCountServlet</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>SelKb01Servlet</servlet-name>

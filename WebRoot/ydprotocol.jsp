@@ -1,6 +1,6 @@
+<%@page import="com.neusoft.bean.Protocol"%>
 <%@page import="com.neusoft.util.TimeUtil"%>
 <%@page import="com.neusoft.bean.Jinfo"%>
-<%@page import="com.neusoft.bean.Protocol"%>
 <%@ page language="java" import="java.util.*,com.neusoft.bean.Kb01" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();

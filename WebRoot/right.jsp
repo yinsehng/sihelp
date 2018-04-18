@@ -43,7 +43,7 @@ body {
 <script type="text/javascript" src="<%=basePath %>js/ymPrompt.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=basePath %>css/admin.css" />
 <script type="text/javascript" src="<%=basePath %>plugin/jquery/jquery-1.6.2.js"></script>
-<script language="javascript" >
+<%-- <script language="javascript" >
 	$(function(){
 		$.ajax({
 			url:"<%=basePath%>servlet/AjaxCountServlet?t="+new Date(),
@@ -68,7 +68,7 @@ body {
 			}
 		 });
 	});
-</script>
+</script> --%>
 
 </head>
 <% 
