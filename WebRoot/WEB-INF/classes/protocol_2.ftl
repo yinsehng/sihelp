@@ -241,7 +241,7 @@
     <strong><span style="font-size:21px;font-family: 宋体">第三十三条&nbsp;</span></strong><span style="font-size:21px;font-family:宋体">本协议未尽事宜，经甲乙双方同意，可用换文形式进行补充，效力与本协议相同。&nbsp;&nbsp;&nbsp; </span>
 </p>
 <p style="text-indent:40px;line-height:40px">
-    <strong><span style="font-size:21px;font-family: 宋体">第三十四条</span></strong><span style="font-size:21px;font-family:宋体">&nbsp;本协议有效期自${protocol.WQ_YEAR}年 01月 01日起至${protocol.WQ_YEAR}年12月31日止。本协议一式两份，甲乙双方各执一份，具有同等效力。</span>
+    <strong><span style="font-size:21px;font-family: 宋体">第三十四条</span></strong><span style="font-size:21px;font-family:宋体">&nbsp;本协议有效期自${protocol.WQ_TIME}起至${protocol.WQ_YEAR}年12月31日止。本协议一式两份，甲乙双方各执一份，具有同等效力。</span>
 </p>
 <p>
     <span style="font-size:21px;font-family: 宋体">&nbsp; 附件：哈尔滨市基本医疗保险定点零售药店服务质量考核办法</span>

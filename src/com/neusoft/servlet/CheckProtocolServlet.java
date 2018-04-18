@@ -109,7 +109,8 @@ public class CheckProtocolServlet extends HttpServlet {
 					protocol.setWQ_TEL(prs.getString("WQ_TEL"));
 					protocol.setWQ_IP(prs.getString("WQ_IP"));
 					protocol.setWQ_YEAR(prs.getString("WQ_YEAR"));
-					protocol.setWQ_TIME(prs.getString("WQ_TIME"));
+					
+					protocol.setWQ_TIME(TimeUtil.getDate(prs.getString("WQ_TIME")));
 					protocol.setTYPE(prs.getString("TYPE"));
 					protocol.setWQ_VALID(prs.getString("WQ_VALID"));
 					protocol.setWQ_OPTIONS(prs.getString("WQ_OPTIONS"));

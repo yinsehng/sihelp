@@ -449,7 +449,7 @@
     <span style="font-size:19px;font-family:宋体">第六十二条</span><span style="font-size:19px">&nbsp;</span><span style="font-size:19px;font-family:宋体">协议执行过程中发生的争议，应首先通过协商解决。双方协商不成的，由人力资源和社会保障行政部门提出处理意见或依法进行仲裁。对人力资源和社会保障行政部门提出的处理意见不服的，可以提起行政诉讼。</span>
 </p>
 <p style=";margin-bottom:0;text-align:justify;text-justify: inter-ideograph;line-height:37px">
-    <span style="font-size:19px;color:windowtext">&nbsp;&nbsp;&nbsp; </span><span style="font-size:19px;color:windowtext">第六十三条 本协议有效期自${protocol.WQ_YEAR}年&nbsp;01月&nbsp;01日起至${protocol.WQ_YEAR}年12月31日止。</span>
+    <span style="font-size:19px;color:windowtext">&nbsp;&nbsp;&nbsp; </span><span style="font-size:19px;color:windowtext">第六十三条 本协议有效期自${protocol.WQ_TIME}起至${protocol.WQ_YEAR}年12月31日止。</span>
 </p>
 <p style=";margin-bottom:0;text-align:justify;text-justify: inter-ideograph;text-indent:37px;line-height:37px">
     <span style="font-size:19px;color:windowtext">第</span><span style="font-size:19px">六十四</span><span style="font-size:19px;color:windowtext">条&nbsp;</span><span style="font-size:19px">协议执行期间，国家法律、法规有调整的，甲乙双方按照新规定执行本协议，如无法达成协议，双方可解除协议。</span>
