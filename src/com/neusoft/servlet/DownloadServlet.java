@@ -1,48 +1,28 @@
 package com.neusoft.servlet;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.neusoft.bean.Message;
-import com.neusoft.bean.User;
-import com.neusoft.jdbc.ConnectionManager;
-import com.neusoft.util.TimeUtil;
-
-import eu.bitwalker.useragentutils.UserAgent;
 
 public class DownloadServlet extends HttpServlet {
 
-	/**
-	 * Constructor of the object.
-	 */
+	private static final long serialVersionUID = 1L;
+
 	public DownloadServlet() {
 		super();
 	}
 
-	/**
-	 * Destruction of the servlet. <br>
-	 */
 	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+		super.destroy();
 	}
-
-	
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -92,13 +72,7 @@ public class DownloadServlet extends HttpServlet {
 	         in.close();
 	     }
 
-	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
-	 */
 	public void init() throws ServletException {
-		// Put your code here
 	}
 
 }

@@ -7,10 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -19,35 +16,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.neusoft.bean.Jinfo;
-import com.neusoft.bean.Kb01;
 import com.neusoft.bean.Message;
 import com.neusoft.bean.Protocol;
 import com.neusoft.bean.User;
 import com.neusoft.jdbc.ConnectionManager;
 import com.neusoft.util.DocUtil;
 import com.neusoft.util.TimeUtil;
-import com.neusoft.util.Util;
 
 import eu.bitwalker.useragentutils.UserAgent;
 
 public class CheckProtocolServlet extends HttpServlet {
-	/**
-	 * Constructor of the object.
-	 */
+	
+	private static final long serialVersionUID = 1L;
+
 	public CheckProtocolServlet() {
 		super();
 	}
 
-	/**
-	 * Destruction of the servlet. <br>
-	 */
 	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+		super.destroy();
 	}
-
-	
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -94,8 +82,6 @@ public class CheckProtocolServlet extends HttpServlet {
 				//利用模板生成html页面，将URL传到前台进行打印
 				//查询协议信息
 				Map<String, Object> dataMap=new HashMap<String, Object>();
-				List<String> list = new ArrayList<String>();
-				List<String> listOp = new ArrayList<String>();
 		        Protocol protocol = new Protocol();
 				//查找协议项进行填充
 				prs = st.executeQuery("select *from PROTOCOL where akb020 = '"+AKB020+"' and WQ_YEAR = '"+WQ_YEAR+"' and WQ_VALID = '1'");
@@ -176,29 +162,10 @@ public class CheckProtocolServlet extends HttpServlet {
 			request.setAttribute("mes", mes);
 			request.getRequestDispatcher("../exec/execkc33.jsp").forward(request, response);
 		}finally{
-			try {
-				if(rs!=null)
-					rs.close();
-				if(prs != null)
-					prs.close();
-				if(st!=null)
-					st.close();
-				if(con!=null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			cm.close(con, st, rs);
 		}
 	}
 	
-	 
-
-	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
-	 */
 	public void init() throws ServletException {
-		// Put your code here
 	}
 }

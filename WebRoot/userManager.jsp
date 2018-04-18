@@ -93,13 +93,13 @@ function del(t){
 }
 function moves(id){
 	var bgcolor = $('#t'+id).attr('bgcolor');
-	if (bgcolor != "#98F5FF") {
+	if (bgcolor != "#98F5FF" && bgcolor != "#98f5ff") {
 		document.getElementById("t"+id).className='otr';
 	}
 }
 function outs(id){
 	var bgcolor = $('#t'+id).attr('bgcolor');
-	if (bgcolor != "#98F5FF") {
+	if (bgcolor != "#98F5FF" && bgcolor != "#98f5ff") {
 		document.getElementById("t"+id).className='Notr';
 	}
 	

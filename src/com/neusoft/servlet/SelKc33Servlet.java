@@ -15,26 +15,18 @@ import javax.servlet.http.HttpSession;
 import com.neusoft.bean.Message;
 import com.neusoft.bean.User;
 import com.neusoft.jdbc.ConnectionManager;
-import com.neusoft.jdbc.SiConnManager;
 
 public class SelKc33Servlet extends HttpServlet {
 
-	/**
-	 * Constructor of the object.
-	 */
+	private static final long serialVersionUID = 1L;
+
 	public SelKc33Servlet() {
 		super();
 	}
 
-	/**
-	 * Destruction of the servlet. <br>
-	 */
 	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+		super.destroy();
 	}
-
-	
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -43,7 +35,6 @@ public class SelKc33Servlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		//µÇÂ¼ÓÃ»§
 		User u=(User)session.getAttribute("user");
-		
 		
 		ConnectionManager cm= ConnectionManager.getInstance();
 		Connection con=null;
@@ -61,7 +52,6 @@ public class SelKc33Servlet extends HttpServlet {
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			Message mes=new Message();
@@ -69,29 +59,11 @@ public class SelKc33Servlet extends HttpServlet {
 			request.setAttribute("mes", mes);
 			request.getRequestDispatcher("../exec/execkc33.jsp").forward(request, response);
 		}finally{
-			try {
-				if(rs!=null)
-					rs.close();
-				if(st!=null)
-					st.close();
-				if(con!=null)
-					con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			cm.close(con, st, rs);
 		}
 	}
 	
-	 
-
-	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
-	 */
 	public void init() throws ServletException {
-		// Put your code here
 	}
 
 }

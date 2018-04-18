@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class LoginFilter implements Filter{
@@ -22,7 +21,6 @@ public class LoginFilter implements Filter{
 			FilterChain chain) throws IOException, ServletException {
 		System.out.println(">>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<");
 		HttpServletRequest httpServletRequest = (HttpServletRequest)request;
-		HttpServletResponse httpServletResponse = (HttpServletResponse)response;
 		HttpSession session = httpServletRequest.getSession();
 		if (session == null) {
 			//session已无，重新登录

@@ -6,8 +6,8 @@ import java.util.Properties;
 
 public class EnvServlet {
 	public long timeUse=0;
-	public Hashtable htParam=new Hashtable();
-	private Hashtable htShowMsg=new Hashtable();
+	public Hashtable<String,String> htParam=new Hashtable<String,String>();
+	private Hashtable<String,String> htShowMsg=new Hashtable<String,String>();
 	public void setHashtable()
 	{
 		Properties me=System.getProperties();

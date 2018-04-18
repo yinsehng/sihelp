@@ -11,42 +11,28 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.neusoft.bean.Kb01;
 import com.neusoft.bean.Page;
-import com.neusoft.bean.User;
 import com.neusoft.jdbc.ConnectionManager;
-import com.neusoft.jdbc.SiConnManager;
 
 public class SelKb01Servlet extends HttpServlet {
 
-	/**
-	 * Constructor of the object.
-	 */
+	private static final long serialVersionUID = 1L;
+
 	public SelKb01Servlet() {
 		super();
 	}
 
-	/**
-	 * Destruction of the servlet. <br>
-	 */
 	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+		super.destroy();
 	}
 
-	
-
+	@SuppressWarnings("resource")
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		//获取session
-		HttpSession session=request.getSession();
-		//登录用户
-		User u=(User)session.getAttribute("user");
-		
 		//获取前台数据
 		String akb020=request.getParameter("akb020");
 		String akb021=request.getParameter("akb021");
@@ -59,13 +45,9 @@ public class SelKb01Servlet extends HttpServlet {
 			pa="1";
 		}
 		
-		
 		//分页
-		Page page=new Page();
+		Page<Kb01> page=new Page<Kb01>();
 		page.setCurrent(Integer.parseInt(pa));
-		System.out.println("每页显示数："+page.getPer());
-		
-		
 		
 		//连接数据
 		ConnectionManager cm= ConnectionManager.getInstance();
@@ -100,7 +82,7 @@ public class SelKb01Servlet extends HttpServlet {
 			sql=sql+") a where rownum<='"+iii+"') where rn>='"+ii+"'";
 			
 			rs=st.executeQuery(sql);
-			ArrayList al=new ArrayList();
+			ArrayList<Kb01> al=new ArrayList<Kb01>();
 			while(rs.next()){//akb020,akb021,akb025,aae004,aae005,aae006,ckb162
 				Kb01 kb01=new Kb01();
 				kb01.setAkb020(rs.getString("akb020"));
@@ -130,36 +112,17 @@ public class SelKb01Servlet extends HttpServlet {
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}finally{
-			try {
-				if(rs!=null)
-					rs.close();
-				if(st!=null)
-					st.close();
-				if(con!=null)
-					con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			cm.close(con, st, rs);
 		}
 	
 		
 		
 	}
 	
-	 
-
-	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
-	 */
 	public void init() throws ServletException {
-		// Put your code here
 	}
 
 }

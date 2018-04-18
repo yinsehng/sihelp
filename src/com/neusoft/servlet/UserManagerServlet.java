@@ -1,7 +1,6 @@
 package com.neusoft.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,33 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.neusoft.bean.Jinfo;
-import com.neusoft.bean.Kb01;
 import com.neusoft.bean.Message;
-import com.neusoft.bean.Protocol;
 import com.neusoft.bean.User;
 import com.neusoft.jdbc.ConnectionManager;
 import com.neusoft.util.Page;
 import com.neusoft.util.TimeUtil;
-import com.neusoft.util.Util;
 
 public class UserManagerServlet extends HttpServlet {
-	/**
-	 * Constructor of the object.
-	 */
+	
+	private static final long serialVersionUID = 1L;
+
 	public UserManagerServlet() {
 		super();
 	}
 
-	/**
-	 * Destruction of the servlet. <br>
-	 */
 	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+		super.destroy();
 	}
-
-	
 
 	@SuppressWarnings("resource")
 	@Override
@@ -93,7 +82,6 @@ public class UserManagerServlet extends HttpServlet {
 		page.setCurrent(dqy);//当前页
 		
 		int mys=page.getPer();//每页记录数
-		int zys;//总页数
 		//获取当前登录的用户，通过用户生成对应的网签协议书
 		ConnectionManager cm= ConnectionManager.getInstance();
 		Connection con=null;
@@ -162,27 +150,10 @@ public class UserManagerServlet extends HttpServlet {
 			request.setAttribute("mes", mes);
 			request.getRequestDispatcher("../exec/execkc33.jsp").forward(request, response);
 		}finally{
-			try {
-				if(rs!=null)
-					rs.close();
-				if(st!=null)
-					st.close();
-				if(con!=null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			cm.close(con, st, rs);
 		}
 	}
 	
-	 
-
-	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
-	 */
 	public void init() throws ServletException {
-		// Put your code here
 	}
 }

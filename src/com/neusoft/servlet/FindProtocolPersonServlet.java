@@ -1,16 +1,11 @@
 package com.neusoft.servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,35 +15,20 @@ import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSONObject;
 import com.neusoft.bean.Message;
-import com.neusoft.bean.Protocol;
 import com.neusoft.bean.Protocoluser;
 import com.neusoft.bean.User;
 import com.neusoft.jdbc.ConnectionManager;
-import com.neusoft.util.DocUtil;
-import com.neusoft.util.TimeUtil;
 
-import eu.bitwalker.useragentutils.UserAgent;
 
 public class FindProtocolPersonServlet extends HttpServlet {
 
-	/**
-	 * Destruction of the servlet. <br>
-	 */
+	private static final long serialVersionUID = 1L;
+
+
 	public void destroy() {
 		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
 	}
 
-	/**
-	 * The doGet method of the servlet. <br>
-	 *
-	 * This method is called when a form has its tag value method equals to get.
-	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
-	 */
 	public void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		       //获取session
@@ -67,7 +47,6 @@ public class FindProtocolPersonServlet extends HttpServlet {
 				Connection con=null;
 				Statement st=null;
 				ResultSet rs=null;
-				ResultSet prs=null;
 				try {
 					//首先检查该家医院今年有没有签署了有效的协议，如果有了，则提醒已经签署<这个可以不用>
 					con=cm.getConnection();
@@ -106,25 +85,12 @@ public class FindProtocolPersonServlet extends HttpServlet {
 					request.setAttribute("mes", mes);
 					request.getRequestDispatcher("../exec/execkc33.jsp").forward(request, response);
 				}finally{
-					try {
-						if(rs!=null)
-							rs.close();
-						if(prs != null)
-							prs.close();
-						if(st!=null)
-							st.close();
-						if(con!=null)
-							con.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+					cm.close(con, st, rs);
 				}
 		
 	}
 
-	
 	public void init() throws ServletException {
-		// Put your code here
 	}
 
 }

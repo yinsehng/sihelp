@@ -2,7 +2,9 @@ package com.neusoft.jdbc;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -65,6 +67,18 @@ public class ConnectionManager {
         return conn;
     }
     
+    public void close(Connection con, Statement st, ResultSet rs){
+    	try {
+			if(rs!=null)
+				rs.close();
+			if(st!=null)
+				st.close();
+			if(con!=null)
+				con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    }
 
 
 }

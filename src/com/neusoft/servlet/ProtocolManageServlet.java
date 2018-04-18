@@ -21,23 +21,17 @@ import com.neusoft.util.Page;
 
 public class ProtocolManageServlet extends HttpServlet {
 
-	/**
-	 * Constructor of the object.
-	 */
+	private static final long serialVersionUID = 1L;
+
 	public ProtocolManageServlet() {
 		super();
 	}
 
-	/**
-	 * Destruction of the servlet. <br>
-	 */
 	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+		super.destroy(); 
 	}
 
-	
-
+	@SuppressWarnings("resource")
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -69,7 +63,7 @@ public class ProtocolManageServlet extends HttpServlet {
 		Page<Protocol> page=new Page<Protocol>();
 		page.setPer(6);
 		ArrayList<Protocol> list = new ArrayList<Protocol>();
-		  //分页
+		//分页
 	    int dqy;
 	    if(dqys!=null){
 	    	dqy=Integer.parseInt(dqys);//当前页
@@ -79,9 +73,7 @@ public class ProtocolManageServlet extends HttpServlet {
 		page.setCurrent(dqy);//当前页
 		
 		int mys=page.getPer();//每页记录数
-		int zys;//总页数
 		     
-		
 		try {
 			String sqlc="select count(*) as count from PROTOCOL where 1=1 and WQ_VALID = 1 " + sql_;
 			con=cm.getConnection();
@@ -100,7 +92,6 @@ public class ProtocolManageServlet extends HttpServlet {
 			}
 			sql=sql+" order by WQ_TIME desc) A WHERE ROWNUM <= "+(((dqy-1)*mys)+mys)+") WHERE RN > "+((dqy-1)*mys);
 			
-				
 			rs = st.executeQuery(sql);
 			while(rs.next()){
 				Protocol protocol=new Protocol();
@@ -134,26 +125,11 @@ public class ProtocolManageServlet extends HttpServlet {
 				e1.printStackTrace();
 			}
 		}finally{
-			try {
-				if(rs!=null)
-					rs.close();
-				if(st!=null)
-					st.close();
-				if(con!=null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			cm.close(con, st, rs);
 		}
 	}
 
-	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
-	 */
 	public void init() throws ServletException {
-		// Put your code here
 	}
 
 }

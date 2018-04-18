@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,9 +30,6 @@ import com.neusoft.util.TimeUtil;
 
 public class ExportBooksTableServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 
@@ -169,7 +165,7 @@ public class ExportBooksTableServlet extends HttpServlet {
 	public void init() throws ServletException {
 	}
 	
-	private ArrayList find(String akb020, String akb021, String WQ_YEAR, String type){
+	private ArrayList<User> find(String akb020, String akb021, String WQ_YEAR, String type){
 		String sql_ = "";
 		String A_sql = "";
 		String action = "right";
@@ -236,16 +232,7 @@ public class ExportBooksTableServlet extends HttpServlet {
 				e1.printStackTrace();
 			}
 		}finally{
-			try {
-				if(rs!=null)
-					rs.close();
-				if(st!=null)
-					st.close();
-				if(con!=null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			cm.close(con, st, rs);
 		}
 		return list;
 	}

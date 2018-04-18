@@ -67,7 +67,6 @@ public class CallWebTest {
 
 			            e.printStackTrace(new PrintWriter(sw, true));  
 
-			            String str = sw.toString();  
 
 					return e.getMessage();
 				}

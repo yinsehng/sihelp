@@ -15,26 +15,18 @@ import javax.servlet.http.HttpSession;
 import com.neusoft.bean.Message;
 import com.neusoft.bean.User;
 import com.neusoft.jdbc.ConnectionManager;
-import com.neusoft.jdbc.SiConnManager;
 
 public class UpdPassWordServlet extends HttpServlet {
 
-	/**
-	 * Constructor of the object.
-	 */
+	private static final long serialVersionUID = 1L;
+
 	public UpdPassWordServlet() {
 		super();
 	}
 
-	/**
-	 * Destruction of the servlet. <br>
-	 */
 	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+		super.destroy();
 	}
-
-	
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -46,7 +38,6 @@ public class UpdPassWordServlet extends HttpServlet {
 		//接收前台数据
 		String opass=request.getParameter("opassword");
 		String npass=request.getParameter("npassword");
-		
 		
 		ConnectionManager cm= ConnectionManager.getInstance();
 		Connection con=null;
@@ -75,7 +66,6 @@ public class UpdPassWordServlet extends HttpServlet {
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			Message mes=new Message();
@@ -83,29 +73,11 @@ public class UpdPassWordServlet extends HttpServlet {
 			request.setAttribute("mes", mes);
 			request.getRequestDispatcher("../exec/execkc33.jsp").forward(request, response);
 		}finally{
-			try {
-				if(rs!=null)
-					rs.close();
-				if(st!=null)
-					st.close();
-				if(con!=null)
-					con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			cm.close(con, st, rs);
 		}
 	}
 	
-	 
-
-	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
-	 */
 	public void init() throws ServletException {
-		// Put your code here
 	}
 
 }

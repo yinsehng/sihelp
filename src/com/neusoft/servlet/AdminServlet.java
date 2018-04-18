@@ -2,10 +2,6 @@ package com.neusoft.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,14 +12,17 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
 
-import com.neusoft.bean.Message;
 import com.neusoft.bean.User;
 import com.neusoft.util.ExecAction;
 import com.neusoft.util.Util;
 
 public class AdminServlet extends HttpServlet {
 	
-    private static final Logger log = Logger.getLogger(AdminServlet.class);//日志文件
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final Logger log = Logger.getLogger(AdminServlet.class);//日志文件
 
 	/**
 	 * Constructor of the object.

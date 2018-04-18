@@ -1,7 +1,6 @@
 package com.neusoft.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,26 +19,22 @@ import com.neusoft.bean.Protocol;
 import com.neusoft.bean.User;
 import com.neusoft.jdbc.ConnectionManager;
 import com.neusoft.util.TimeUtil;
-import com.neusoft.util.Util;
 
 public class SelProtocolServlet extends HttpServlet {
-	/**
-	 * Constructor of the object.
-	 */
+	
+	private static final long serialVersionUID = 1L;
+
 	public SelProtocolServlet() {
 		super();
 	}
 
-	/**
-	 * Destruction of the servlet. <br>
-	 */
 	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+		super.destroy();
 	}
 
 	
 
+	@SuppressWarnings("resource")
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -135,27 +130,10 @@ public class SelProtocolServlet extends HttpServlet {
 			request.setAttribute("mes", mes);
 			request.getRequestDispatcher("../exec/execkc33.jsp").forward(request, response);
 		}finally{
-			try {
-				if(rs!=null)
-					rs.close();
-				if(st!=null)
-					st.close();
-				if(con!=null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			cm.close(con, st, rs);
 		}
 	}
 	
-	 
-
-	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
-	 */
 	public void init() throws ServletException {
-		// Put your code here
 	}
 }

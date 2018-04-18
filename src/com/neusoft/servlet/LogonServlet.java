@@ -20,22 +20,15 @@ import com.neusoft.util.TimeUtil;
 
 public class LogonServlet extends HttpServlet {
 
-	/**
-	 * Constructor of the object.
-	 */
+	private static final long serialVersionUID = 1L;
+
 	public LogonServlet() {
 		super();
 	}
 
-	/**
-	 * Destruction of the servlet. <br>
-	 */
 	public void destroy() {
-		super.destroy(); // Just puts "destroy" string in log
-		// Put your code here
+		super.destroy();
 	}
-
-	
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -124,38 +117,15 @@ public class LogonServlet extends HttpServlet {
 			try {
 				con.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}finally{
-			try {
-				if(rs!=null)
-					rs.close();
-				if(st!=null)
-					st.close();
-				if(con!=null)
-					con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			cm.close(con, st, rs);
 		}
-//		User u=new User();
-//		u.setAkb021("8888");
-//		u.setName("超级用户");
-//		u.setType(1);
-//		session.setAttribute("user", u);//存储登录标志
 		request.getRequestDispatcher("../main.jsp").forward(request, response);
 		
 	}
 
-	/**
-	 * Initialization of the servlet. <br>
-	 *
-	 * @throws ServletException if an error occurs
-	 */
 	public void init() throws ServletException {
-		// Put your code here
 	}
-
 }

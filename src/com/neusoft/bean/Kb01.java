@@ -1,7 +1,5 @@
 package com.neusoft.bean;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 public class Kb01 {
 	public String akb020;
