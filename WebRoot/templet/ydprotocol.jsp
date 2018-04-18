@@ -986,18 +986,68 @@ function getYear(){
         <div style="padding-top: 3px;" align="left">
         	附件：哈尔滨市基本医疗保险定点零售药店服务质量考核办法
         </div>
-        <div style="width: 600px;height:110px;align: right;margin-top: 100px;">
-        	签订日期：<%=WQ_DATE %>
-        </div>
    </div>
 </div>
 
 <!-- 第七页 end-->
+
 <!-- 第8页-->
 <div class="protocol" align="center" style="position: absolute;display: none;width: 45%;">
    <div class="common" style="width:100%;margin-top: 10%;padding-left: 70%">
-        
-        <div style="padding-top: 30%;font-weight: bold;" align="left">
+        <div style="width: 600px;height:240px;margin-left:-40%;align: left;">
+        	<div style="width:60%;height:100%;float: left;">
+        		<div style="width:100%;height:20%;float: left;">
+        		甲方：哈尔滨市医疗保险管理中心
+        		</div>
+        		<div style="width:100%;height:20%;float: left;">
+        		（盖章）
+        		</div>
+        		<div style="width:100%;height:20%;float: left;">
+        		法人代表：
+        		</div>
+        		<div style="width:100%;height:20%;float: left;">
+        		<% if (flag == "1"){%>
+                <%=protocol.getWQ_JNAME() %>
+                <%} else {%>
+                <%=jinfo.getCORPORATION() %>
+                <%} %>
+        		</div>
+        		<div class="date" style="width:100%;height:20%;float: left;">
+        		　<% if (flag == "1"){%>
+                <%=protocol.getWQ_JDATE() %>
+                <%} %>
+        		</div>
+        	</div>
+        	<div style="width:40%;height:100%;float: right;">
+        		<div style="width:100%;height:20%;float: left;">
+        		乙方：
+        		<% if (flag == "1"){%>
+                <%=protocol.getAKB021() %>
+                <%} else {%>
+                <%=kb01.getAkb021() %>
+                <%} %>
+        		</div>
+        		<div style="width:100%;height:20%;float: left;">
+        		（盖章）
+        		</div>
+        		<div style="width:100%;height:20%;float: left;">
+        		法人代表：
+        		</div>
+        		<div style="width:100%;height:20%;float: left;">
+        		<% if (flag == "1"){%>
+                <%=protocol.getWQ_NAME()%>
+                <%} else {%>
+                <%=kb01.getAae004()%>
+                <%} %>
+        		</div>
+        		<div class="date" style="width:100%;height:20%;float: left;">
+        		<% if (flag == "1"){%>
+                <%=protocol.getWQ_YDATE() %>
+                <%} %>
+        		</div>
+        	</div>
+        </div>
+        <div style="padding-top: 0px;font-weight: bold;" align="left">
         	<input id="select" type="checkbox" name="isagree" checked="<%if(flag == "1"){%>checked<%} %>" value=""/>您是否为法人代表本人或法人代表授权的代理人并已经阅读完本协议
         </div>
         <div style="padding-top: 20px;padding-left: 50px;" align="left">

@@ -100,15 +100,17 @@ body {
   		sFeatures += ",scrollbars=0,resizable=1,left="+screenX+"px,top="+screenY+"px,width="+width+"px,height="+height+"px";
 		 
    		//随机产生窗口的名字
-   		var sName = new Date().getTime(); 
-   		window.open( "", sName, sFeatures);
+   		var sName ="LR"+parseInt(Math.random() * 100000000);//利用随机数处理WinName
+   		window.open(url,sWinName, 'toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=no,resizable=yes,copyhistory=yes');
    		document.getElementById("l_form").target = sName;
 		document.getElementById("l_form").submit();
-		window.opener = new Object();
-   		self.close();
-	   
+		closeWin();
 	}
-	 
+	function closeWin() {
+		  window.opener=null;
+		  window.open('','_self');
+		  window.close();
+		}
 	function change(key){
 		if(key=='no'){
 			closeme();

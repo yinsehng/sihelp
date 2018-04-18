@@ -247,26 +247,8 @@
     <span style="font-size:21px;font-family: 宋体">&nbsp; 附件：哈尔滨市基本医疗保险定点零售药店服务质量考核办法</span>
 </p>
 </br>
-<p style="line-height:40px">
-    <span style="font-size:21px;font-family:宋体">&nbsp; &nbsp; &nbsp; 甲方：${protocol.WQ_JINSTITUTION} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 乙方：${protocol.WQ_AKB021}</span>
-</p>
-<p style="text-indent:29px;line-height:40px">
-    <span style="font-size:21px;font-family:宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:21px;font-family:宋体">（盖章）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (盖章)</span>
-</p>
-<p style="text-indent:157px;line-height:40px">
-    <span style="font-size:21px;font-family:宋体">&nbsp;</span><span style="font-family: 宋体; font-size: 21px;">&nbsp;</span>
-</p>
-<p style="line-height:40px">
-    <span style="font-size:21px;font-family:宋体">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 法人代表： &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;法人代表：</span>
-</p>
-<p style="text-indent:64px;line-height:40px">
-    <span style="font-size:21px;font-family:宋体">&nbsp; &nbsp; </span><span style="font-size:21px;font-family:宋体">${protocol.WQ_JNAME} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ${protocol.WQ_NAME}</span>
-</p>
-<p style="text-indent:29px;line-height:40px">
-    <span style="font-size:21px;font-family:宋体">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-</p>
 <p style="text-indent:85px;line-height:40px">
-    <span style="font-size:21px;font-family:宋体"></span><span style="font-size:21px;font-family:宋体">${protocol.WQ_JDATE} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${protocol.WQ_YDATE}</span>
+    <span style="font-size:21px;font-family:宋体"></span><span style="font-size:21px;font-family:宋体"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;签订日期:${protocol.WQ_YDATE}</span>
 </p>
 </body>
 </html>
