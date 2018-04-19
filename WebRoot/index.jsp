@@ -96,12 +96,13 @@ body {
             screenY = (screen.availHeight-768)/2;
 	    }
 				
-		var sFeatures = "toolbar=0,location=0,directories=0,status=1,menubar=0";
-  		sFeatures += ",scrollbars=0,resizable=1,left="+screenX+"px,top="+screenY+"px,width="+width+"px,height="+height+"px";
+		//var sFeatures = "toolbar=0,location=0,directories=0,status=1,menubar=0";
+		var sFeatures = "toolbar=no,channelmode=yes,resizable=1,fullscreen=yes,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=yes";
+  		sFeatures += ",left="+screenX+"px,top="+screenY+"px,width="+width+"px,height="+height+"px";
 		 
    		//随机产生窗口的名字
    		var sName ="LR"+parseInt(Math.random() * 100000000);//利用随机数处理WinName
-   		window.open(url,sWinName, 'toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=no,resizable=yes,copyhistory=yes');
+   		window.open(url,sWinName, sFeatures);
    		document.getElementById("l_form").target = sName;
 		document.getElementById("l_form").submit();
 		closeWin();

@@ -9,9 +9,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>定点医药机构服务协议网签系统</title>
-<script type="text/javascript" src="<%=basePath %>js/ymPrompt.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=basePath %>skin/dmm-green/ymPrompt.css" />
-<script type="text/javascript" src="<%=basePath %>js/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="<%=basePath %>plugin/prompt/ymPrompt.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=basePath %>plugin/prompt/skin/dmm-green/ymPrompt.css" />
+<script type="text/javascript" src="<%=basePath %>plugin/jquery/jquery-1.6.2.js"></script>
  
 </head>
 

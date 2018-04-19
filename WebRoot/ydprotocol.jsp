@@ -52,6 +52,7 @@
 <link rel="stylesheet" href="<%=basePath %>plugin/simplepop/main.css"/>
 <script src="<%=basePath %>plugin/simplepop/simplepop.js"></script>
 <script language="javascript" src="<%=basePath %>plugin/lodop/LodopFuncs.js"></script>
+<script language="javascript" src="<%=basePath %>js/my.js"></script>
 <style type="text/css">
 .body{
     font: 11px/1.25 Microsoft Yahei,Helvetica,sans-serif;
@@ -91,22 +92,7 @@ ul {
 </style>
 <script type="text/javascript">
 var ymr = timer();
-var LODOP; //声明为全局变量      
-function PrintOneURL(url){
-	CreatePage();
-	var allUrl = "<%=basePath%>" + url;
-	LODOP=getLodop();
-	LODOP.ADD_PRINT_URL(30,20,746,"95%",allUrl);
-	LODOP.SET_PREVIEW_WINDOW(0,0,0,1000,600,"");
-	LODOP.SET_SHOW_MODE("SKIN_TYPE",14);	
-	LODOP.PREVIEW();
-};
-function CreatePage(){
-	LODOP=getLodop();  
-	LODOP.PRINT_INITA(12,14,690,450,"按网址打印");
-	LODOP.SET_PRINT_STYLEA(0,"FontSize",30);
-	LODOP.SET_PRINT_STYLEA(1,"Horient",2);
-};
+
 $(document).ready(function(){
 	  
 	  $("#protocol_heard_right").text(getYear());
@@ -187,34 +173,62 @@ $(document).ready(function(){
 		  showPageNum(point_num);
 	  });
 	  $("#print").click(function(){
-		  //检查今年是否签订协议，没签署你打印个毛
-		  $.ajax({
-	      	    url:"<%=basePath%>servlet/CheckProtocolServlet?temptime="+Math.random(),
-	      	    data:{},  
-	      	    type:'GET',
-	      	    cache:false, 
-	      	    dataType:'text',
-	      	    success:function(result) {
-	      	    	if (result == "repeat") {
-	      	    		//今年已经签署，可以打印
-	      	    		SimplePop.confirm("您今年还未签署协议不能进行打印，请确认!",
-								  {
-							  		type: "error",
-							  		title: "安装下载",
-							  		opacity: 0.2,
-							  		cancel: function(){
-					                 }
-	      	    		});
-	      	    	} else {
-	      	    		PrintOneURL(result);
-	      	    	}
-	      	    },
-	      	    error : function() {
-	      	    	
-	      	    }
-	      	});
+		  print("<%=basePath%>");
 	  });
 	  $("#agree").click(function(){
+		  var inputs = $(".options");
+			  
+			  for (var i = 0; i < inputs.length; i++) {
+				  var value = $(inputs[i]).val();
+				  var optionNum = $(inputs[i]).attr("order-name");
+				  var page = $(inputs[i]).attr("currentPage");
+				  var name = $(inputs[i]).attr("name");
+				  
+				  if (value == "") {
+						  SimplePop.confirm("第<font size='7px' color='red'>"+page+"</font>页存在未填写的指标项，请确认!",
+								  {
+							  		type: "error",
+							  		title: "错误提示",
+							  		opacity: 0.2,
+							  		cancel: function(){
+					                  
+					              },
+					              confirm: function(){
+					              	showDiv(page-1);
+									showNum(page-1);
+									showPageNum(page);
+					              }
+								  });
+						  return;
+				   } else {
+					   if (name.substr(0,6) == "option" && name != "option3") {
+							  if (!isNum(value)) {
+								  tip(page,optionNum);
+								  return;
+							  } else {
+								  if (name == "option5" || name == "option6" || name == "option18") {
+									  if (value > 100 || value < 0){
+										  tip(page,optionNum);
+										  return;
+									  }
+								  }
+								  continue;
+							  }
+						  }
+					   continue;
+				   }
+				  
+			  }
+			  //判断是否勾选阅读协议
+			  if (!$("#select").prop("checked")) {
+				  SimplePop.confirm("在同意之前请选中阅读协议!",
+						  {
+					  		type: "error",
+					  		title: "错误提示",
+					  		opacity: 0.2,
+						  });
+				  return;
+			  }
 		  //看是不是已经填写完签署单
 		  $.ajax({
     		      	    url:"<%=basePath%>servlet/CheckPersonServlet?temptime="+Math.random(),
@@ -224,59 +238,6 @@ $(document).ready(function(){
     		      	    dataType:'text',
     		      	    success:function(result) {
     		      	    	if (result == "1") {
-    		      			  var inputs = $(".options");
-    		      			  
-    		      			  for (var i = 0; i < inputs.length; i++) {
-    		      				  var value = $(inputs[i]).val();
-    		      				  var optionNum = $(inputs[i]).attr("order-name");
-    		      				  var page = $(inputs[i]).attr("currentPage");
-    		      				  var name = $(inputs[i]).attr("name");
-    		      				  
-    		      				  if (value == "") {
-    		      						  SimplePop.confirm("第<font size='7px' color='red'>"+page+"</font>页存在未填写的指标项，请确认!",
-    		      								  {
-    		      							  		type: "error",
-    		      							  		title: "错误提示",
-    		      							  		opacity: 0.2,
-    		      							  		cancel: function(){
-    		      					                  
-    		      					              },
-    		      					              confirm: function(){
-    		      					              	showDiv(page-1);
-    		      									showNum(page-1);
-    		      									showPageNum(page);
-    		      					              }
-    		      								  });
-    		      						  return;
-    		      				   } else {
-    		      					   if (name.substr(0,6) == "option" && name != "option3") {
-    		      							  if (!isNum(value)) {
-    		      								  tip(page,optionNum);
-    		      								  return;
-    		      							  } else {
-    		      								  if (name == "option5" || name == "option6" || name == "option18") {
-    		      									  if (value > 100 || value < 0){
-    		      										  tip(page,optionNum);
-    		      										  return;
-    		      									  }
-    		      								  }
-    		      								  continue;
-    		      							  }
-    		      						  }
-    		      					   continue;
-    		      				   }
-    		      				  
-    		      			  }
-    		      			  //判断是否勾选阅读协议
-    		      			  if (!$("#select").prop("checked")) {
-    		      				  SimplePop.confirm("在同意之前请选中阅读协议!",
-    		      						  {
-    		      					  		type: "error",
-    		      					  		title: "错误提示",
-    		      					  		opacity: 0.2,
-    		      						  });
-    		      				  return;
-    		      			  }
     		      			  //此时开始提交所有参数，成功后自动刷新本页面
     		      			  //获取所有参数
     		      			  var WQ_AKB021 = "";
@@ -397,17 +358,7 @@ $(document).ready(function(){
     		      	    		      	    success:function(result) {
     		      	    		      	    	if (result == "success") {
     		      	    		      	    		$(".popTitle .close").triggerHandler("click");
-    		      	    		      	    	SimplePop.confirm("<font size='7'>保存成功!</font>",
-    		      	    		      				  {
-    		      	    		      			  		type: "right",
-    		      	    		      			  		title: "提示",
-    		      	    		      			  		opacity: 0.2,
-    		      	    		      			  		cancel: function(){
-    		      	    		      	                  
-    		      	    		      	              },
-    		      	    		      	              confirm: function(){
-    		      	    		      	              }
-    		      	    		      				  });
+    		      	    		      	    		$("#agree").trigger("click");
     		      	    		      	    	}
     		      	    		      	    },
     		      	    		      	    error : function() {

@@ -39,8 +39,7 @@ body {
 }
 -->
 </style>
-<script type="text/javascript" src="<%=basePath %>js/jquery-1.6.2.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/ymPrompt.js"></script>
+<script type="text/javascript" src="<%=basePath %>plugin/prompt/ymPrompt.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=basePath %>css/admin.css" />
 <script type="text/javascript" src="<%=basePath %>plugin/jquery/jquery-1.6.2.js"></script>
 <%-- <script language="javascript" >
