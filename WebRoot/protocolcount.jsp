@@ -166,7 +166,7 @@ var option = {
     calculable : true,
     series : [
         {
-            name:'访问来源',
+            name:'占比统计',
             type:'pie',
             radius : '55%',
             center: ['50%', '60%'],
@@ -212,13 +212,15 @@ var option2 = {
  },
  xAxis: [                                    // 直角坐标系中横轴数组
      {
-         type: 'category',                   // 坐标轴类型，横轴默认为类目轴，数值轴则参考yAxis说明
+         type: 'category', 
+         name:'时间',// 坐标轴类型，横轴默认为类目轴，数值轴则参考yAxis说明
          data: [<%=xAxis%>]
      }
  ],
  yAxis: [                                    // 直角坐标系中纵轴数组
      {
-         type: 'value',                      // 坐标轴类型，纵轴默认为数值轴，类目轴则参考xAxis说明
+         type: 'value', 
+         name:'个',// 坐标轴类型，纵轴默认为数值轴，类目轴则参考xAxis说明
          boundaryGap: [1, 1],            // 坐标轴两端空白策略，数组内数值代表百分比
          splitNumber: 4,                      // 数值轴用，分割段数，默认为5
          min:0
