@@ -16,6 +16,7 @@
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/image/admin_jinfoshow.png)
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/image/admin_jinfoedit.png)
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/image/admin_usermanger.png)
+![](https://github.com/yinsehng/sihelp/blob/master/doc/image/admin_usermanagerinfo.png)
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/image/admin_usermanagerdaochu.png)
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/image/admin_xieyimanager.png)
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/image/admin_xieyicount.png)
