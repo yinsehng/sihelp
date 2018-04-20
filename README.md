@@ -9,7 +9,6 @@
 
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/image/Y1430_shouye.png)
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/image/Y1430_weiye.png)
-![](https://github.com/yinsehng/sihelp/blob/master/doc/image/Y1430_weiye.png)
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/image/Y1430_readxieyi.png)
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/image/Y1430_gereninfo.png)
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/image/Y1430_xieyisuccess.png)
