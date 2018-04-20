@@ -19,4 +19,4 @@
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/admin_usermanger.png)
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/admin_usermanagerdaochu.png)
 ![](https://github.com/yinsehng/sihelp/blob/master/doc/admin_xieyimanager.png)
-![](https://github.com/yinsehng/sihelp/blob/master/doc/admin_xieyicount.png)
+![](https://github.com/yinsehng/sihelp/blob/master/doc/image/admin_xieyicount.png)
