@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.MDC;
 
+import com.neusoft.bean.User;
+
 
 public class LogonFilter implements Filter {
 
@@ -34,8 +36,13 @@ public class LogonFilter implements Filter {
 	    StringBuffer url=request.getRequestURL();
     	String urls[]=url.toString().split("/");
     	String page=urls[urls.length-1];
+    	User user = (User) session.getAttribute("user");
+    	String img = (String)session.getAttribute("rand");
     	
 	    if (session.getAttribute("user") != null) {//登录后才能访问  
+	    	if ("sihelp".equals(page)) {
+	    		request.getRequestDispatcher("/servlet/LogonServlet?username="+user.getName()+"&password="+user.getPassword()+"&img="+img).forward(request, response);
+	    	}
 	    	//1.首先查询所访问的页面是否在菜单列表中
 //	    	int flagall=0;
 //	    	ArrayList alall=(ArrayList)session.getAttribute("menuall");
