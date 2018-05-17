@@ -58,7 +58,7 @@ public class CheckPersonServlet extends HttpServlet {
 			st=con.createStatement();
 			String sql = "select count(1) NUM from protocoluser where akb020 = '"+AKB020+"' and AAE314 = 1 and YEAR = '"+YEAR+"'";
 			rs = st.executeQuery(sql);
-			
+			//test测试一下
 			if(rs.next()){
 				//保存成功
 				int num = rs.getInt("NUM");
