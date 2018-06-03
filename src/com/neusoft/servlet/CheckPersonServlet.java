@@ -37,18 +37,19 @@ public class CheckPersonServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		//»ñÈ¡session
+		//è·å–session
 		HttpSession session=request.getSession();
-		//µÇÂ¼ÓÃ»§
+		//ç™»å½•ç”¨æˆ·
 		User u=(User)session.getAttribute("user");
 		if (u == null) {
 			request.getRequestDispatcher("../index.jsp?out=ok").forward(request, response);
 			return;
 		}
-		//»ñÈ¡Ò½Ôº±àÂëºÍÃû³Æ
+		//è·å–åŒ»é™¢ç¼–ç å’Œåç§°
+		//è¿™ä¸ªæ˜¯future2åˆ†æ”¯
 		String AKB020 = u.getName();
 		String YEAR = TimeUtil.getYear();
-		//»ñÈ¡µ±Ç°µÇÂ¼µÄÓÃ»§£¬Í¨¹ıÓÃ»§Éú³É¶ÔÓ¦µÄÍøÇ©Ğ­ÒéÊé
+		//è·å–å½“å‰ç™»å½•çš„ç”¨æˆ·ï¼Œé€šè¿‡ç”¨æˆ·ç”Ÿæˆå¯¹åº”çš„ç½‘ç­¾åè®®ä¹¦
 		ConnectionManager cm= ConnectionManager.getInstance();
 		Connection con=null;
 		Statement st=null;
@@ -58,9 +59,9 @@ public class CheckPersonServlet extends HttpServlet {
 			st=con.createStatement();
 			String sql = "select count(1) NUM from protocoluser where akb020 = '"+AKB020+"' and AAE314 = 1 and YEAR = '"+YEAR+"'";
 			rs = st.executeQuery(sql);
-			//test²âÊÔÒ»ÏÂ£¬²âÊÔ£¬ÎÒÒ²ÒªĞŞ¸ÄÕâÒ»ĞĞ£¬ÔõÃ´Ñù£¬¹ş¹ş¹ş
+			//testæµ‹è¯•ä¸€ä¸‹ï¼Œæµ‹è¯•ï¼Œæˆ‘ä¹Ÿè¦ä¿®æ”¹è¿™ä¸€è¡Œï¼Œæ€ä¹ˆæ ·ï¼Œå“ˆå“ˆå“ˆ
 			if(rs.next()){
-				//±£´æ³É¹¦
+				//ä¿å­˜æˆåŠŸ
 				int num = rs.getInt("NUM");
 				if (num > 0) {
 					response.setContentType("text/html;charset=UTF-8");
@@ -85,7 +86,7 @@ public class CheckPersonServlet extends HttpServlet {
 				e1.printStackTrace();
 			}
 			Message mes=new Message();
-			mes.setMessage("Êı¾İ¿â²Ù×÷Ê§°Ü");
+			mes.setMessage("æ•°æ®åº“æ“ä½œå¤±è´¥");
 			request.setAttribute("mes", mes);
 			request.getRequestDispatcher("../exec/execkc33.jsp").forward(request, response);
 		}finally{
