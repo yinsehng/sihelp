@@ -50,7 +50,7 @@ public class CheckPersonServlet extends HttpServlet {
 		String AKB020 = u.getName();
 		String YEAR = TimeUtil.getYear();
 		//获取当前登录的用户，通过用户生成对应的网签协议书
-		//地方woshi我说你呢傻逼欠几把揍啊你才是大傻逼所在的当前的我是在浙江省杭州市滨江区莎士比亚我是
+		//地方woshi我说你呢傻逼你麻痹欠几把揍啊你才是大傻逼所在的当前的我是在浙江省杭州市滨江区莎士比亚我是
         //test
 		ConnectionManager cm= ConnectionManager.getInstance();
 		Connection con=null;
