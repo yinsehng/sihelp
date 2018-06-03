@@ -51,6 +51,7 @@ public class CheckPersonServlet extends HttpServlet {
 		String YEAR = TimeUtil.getYear();
 		//获取当前登录的用户，通过用户生成对应的网签协议书
 		//地方当前的我是在浙江省杭州市滨江区莎士比亚我是
+        //test
 		ConnectionManager cm= ConnectionManager.getInstance();
 		Connection con=null;
 		Statement st=null;
