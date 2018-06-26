@@ -50,7 +50,7 @@ public class CheckProtocolServlet extends HttpServlet {
 		}
 		String admin = request.getParameter("ADMIN");
 		String AKB020 = request.getParameter("AKB020");
-		String akb021 = "";
+		String akbssss021 = "ajdfjsdfjsd";
 		String WQ_YEAR = request.getParameter("WQ_YEAR");
 		if (!"1".equals(admin)) {
 			//Ϊ�û���ӡ
