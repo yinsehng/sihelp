@@ -40,9 +40,9 @@ public class CheckProtocolServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//»ñÈ¡session
+		//ï¿½ï¿½È¡session
 		HttpSession session=request.getSession();
-		//µÇÂ¼ÓÃ»§
+		//ï¿½ï¿½Â¼ï¿½Ã»ï¿½
 		User u=(User)session.getAttribute("user");
 		if (u == null) {
 			request.getRequestDispatcher("../index.jsp?out=ok").forward(request, response);
@@ -50,9 +50,10 @@ public class CheckProtocolServlet extends HttpServlet {
 		}
 		String admin = request.getParameter("ADMIN");
 		String AKB020 = request.getParameter("AKB020");
+		String akb021 = "";
 		String WQ_YEAR = request.getParameter("WQ_YEAR");
 		if (!"1".equals(admin)) {
-			//ÎªÓÃ»§´òÓ¡
+			//Îªï¿½Ã»ï¿½ï¿½ï¿½Ó¡
 			WQ_YEAR = TimeUtil.getCurrentDate("yyyy");
 			AKB020 = u.getName();
 		}
@@ -65,25 +66,25 @@ public class CheckProtocolServlet extends HttpServlet {
 		
 		String path = getServletContext().getRealPath("/"); 
 		
-		//»ñÈ¡µ±Ç°µÇÂ¼µÄÓÃ»§£¬Í¨¹ýÓÃ»§Éú³É¶ÔÓ¦µÄÍøÇ©Ð­ÒéÊé
+		//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½É¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ç©Ð­ï¿½ï¿½ï¿½ï¿½
 		ConnectionManager cm= ConnectionManager.getInstance();
 		Connection con=null;
 		Statement st=null;
 		ResultSet rs=null;
 		ResultSet prs=null;
 		try {
-			//Ê×ÏÈ¼ì²é¸Ã¼ÒÒ½Ôº½ñÄêÓÐÃ»ÓÐÇ©ÊðÁËÓÐÐ§µÄÐ­Òé£¬Èç¹ûÓÐÁË£¬ÔòÌáÐÑÒÑ¾­Ç©Êð<Õâ¸ö¿ÉÒÔ²»ÓÃ>
+			//ï¿½ï¿½ï¿½È¼ï¿½ï¿½Ã¼ï¿½Ò½Ôºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½Ð­ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½Ç©ï¿½ï¿½<ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½>
 			con=cm.getConnection();
 			st=con.createStatement();
 			rs=st.executeQuery("select *from PROTOCOL where akb020 = '"+AKB020+"' and WQ_YEAR = '"+WQ_YEAR+"' and WQ_VALID = '1'");
 			
 			if(rs.next()){
-				//ËµÃ÷´æÔÚ£¬Ìø×ª×Ô¶¨Òå´òÓ¡Ò³Ãæ£¬²¢ÀûÓÃfremarkerÉú³ÉÄ£°åÒ³Ãæ
-				//ÀûÓÃÄ£°åÉú³ÉhtmlÒ³Ãæ£¬½«URL´«µ½Ç°Ì¨½øÐÐ´òÓ¡
-				//²éÑ¯Ð­ÒéÐÅÏ¢
+				//Ëµï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½×ªï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Ó¡Ò³ï¿½æ£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½fremarkerï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½Ò³ï¿½ï¿½
+				//ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½htmlÒ³ï¿½æ£¬ï¿½ï¿½URLï¿½ï¿½ï¿½ï¿½Ç°Ì¨ï¿½ï¿½ï¿½Ð´ï¿½Ó¡
+				//ï¿½ï¿½Ñ¯Ð­ï¿½ï¿½ï¿½ï¿½Ï¢
 				Map<String, Object> dataMap=new HashMap<String, Object>();
 		        Protocol protocol = new Protocol();
-				//²éÕÒÐ­ÒéÏî½øÐÐÌî³ä
+				//ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				prs = st.executeQuery("select *from PROTOCOL where akb020 = '"+AKB020+"' and WQ_YEAR = '"+WQ_YEAR+"' and WQ_VALID = '1'");
 				if (prs.next()) {
 					protocol.setAKB020(prs.getString("AKB020"));
@@ -108,12 +109,12 @@ public class CheckProtocolServlet extends HttpServlet {
 					protocol.setWQ_JADDRESS(prs.getString("WQ_JADDRESS"));
 					protocol.setWQ_JPOSTALCODE(prs.getString("WQ_JPOSTALCODE"));
 					dataMap.put("protocol", protocol);
-					//¼×·½µÄµç»°Îª¶à¸ö
+					//ï¿½×·ï¿½ï¿½Äµç»°Îªï¿½ï¿½ï¿½
 					String jtel = protocol.getWQ_JTEL();
 					String[] tels = jtel.split(",");
 					
 					dataMap.put("jtel", tels);
-					//Ð­ÒéÏî
+					//Ð­ï¿½ï¿½ï¿½ï¿½
 					String option = protocol.getWQ_OPTIONS();
 					String[] options = option.split(",");
 					
@@ -136,7 +137,7 @@ public class CheckProtocolServlet extends HttpServlet {
 			        return;
 				}
 			} else {
-				//ËµÃ÷²»´æÔÚ
+				//Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter writer = response.getWriter();
 		        writer.write("repeat");
@@ -148,7 +149,7 @@ public class CheckProtocolServlet extends HttpServlet {
 			
 			try {
 				con.rollback();
-				//±íÊ¾±£´æÊ§°Ü
+				//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter writer = response.getWriter();
 		        writer.write("error");
@@ -158,7 +159,7 @@ public class CheckProtocolServlet extends HttpServlet {
 				e1.printStackTrace();
 			}
 			Message mes=new Message();
-			mes.setMessage("Êý¾Ý¿â²Ù×÷Ê§°Ü");
+			mes.setMessage("ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 			request.setAttribute("mes", mes);
 			request.getRequestDispatcher("../exec/execkc33.jsp").forward(request, response);
 		}finally{
